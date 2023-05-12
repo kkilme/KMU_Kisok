@@ -1,0 +1,15 @@
+class KioskSystem:
+    def __init__(self) -> None:
+        pass
+
+    def StartKioskSystem():
+        pass
+
+    def EndKioskSystem():
+        pass
+
+    def DisplayMenuScreen():
+        pass
+
+    def EnterMenuScreen():
+        pass
