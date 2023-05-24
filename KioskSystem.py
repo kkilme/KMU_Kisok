@@ -1,3 +1,5 @@
+from UIManager import UIManagers
+
 class KioskSystem:
     def __init__(self) -> None:
         pass
