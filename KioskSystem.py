@@ -15,3 +15,8 @@ class KioskSystem:
 
     def EnterMenuScreen():
         pass
+
+
+if __name__ == '__main__':
+    kiosk = KioskSystem()
+    kiosk.StartKioskSystem()

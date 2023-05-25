@@ -21,7 +21,7 @@ UI_EN = {
 *                           *
 *     1. View Menu          *
 *     2. Change Language    *
-*     3. Call Helper        *
+*     3. Call Manager       *
 *                           *
 *****************************
 ''',
