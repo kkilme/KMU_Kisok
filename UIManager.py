@@ -16,3 +16,4 @@ class UIManager:
 
     def MainScreen(self):
         print(self.UIDict['mainscreen'])
+        n = input()

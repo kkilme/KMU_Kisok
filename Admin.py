@@ -1,11 +1,11 @@
-from AdminManager import AdminManager
+# from AdminManager import AdminManager
 
-class Admin:
-    def __init__(self) -> None:
-        pass
+# class Admin:
+#     def __init__(self) -> None:
+#         pass
 
-    def UpdateAccount():
-        pass
+#     def UpdateAccount():
+#         pass
 
-def test():
-    ad = AdminManager()
+# def test():
+#     ad = AdminManager()

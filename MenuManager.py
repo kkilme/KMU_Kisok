@@ -1,11 +1,17 @@
+from Menu import Menu
+from DBManager import DBManager
+
 class MenuManager:
-    def __init__(self, mlist) -> None:
-        self.menuList = mlist
+    def __init__(self):
+        self.DBManager = DBManager()
+        self.menuList = self.DBManager.LoadMenuList()
 
-    def getInstance():
-        pass
+    def DisplayMenu(self):
+        testmenu = Menu(1, 2 ,3, 4)
+        tp = 0
+        for menu in self.menuList:
+            tp += menu.price
 
-    def DisplayMenu():
         pass
 
     def RemoveMenu(menu):

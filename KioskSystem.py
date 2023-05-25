@@ -1,10 +1,12 @@
-from UIManager import UIManagers
+from UIManager import UIManager
 
 class KioskSystem:
     def __init__(self) -> None:
+        self.UIManager = UIManager()
         pass
 
-    def StartKioskSystem():
+    def StartKioskSystem(self):
+        UIManager.MainScreen()
         pass
 
     def EndKioskSystem():

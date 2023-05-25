@@ -1,7 +1,4 @@
 class AdminManager:
-
-    
-
     def __init__(self) -> None:
         pass
 
@@ -9,9 +6,6 @@ class AdminManager:
         pass
 
     def Logout():
-        pass
-
-    def getInstance():
         pass
 
     def Authenticate():
@@ -24,4 +18,7 @@ class AdminManager:
         pass
 
     def ViewStatistics():
+        pass
+
+    def UpdateAccount(self):
         pass
