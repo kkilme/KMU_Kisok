@@ -1,17 +1,13 @@
 from Menu import Menu
 from DBManager import DBManager
+from Singleton import SingletonInstance
 
-class MenuManager:
+class MenuManager(SingletonInstance):
     def __init__(self):
-        self.DBManager = DBManager()
+        self.DBManager = DBManager.instance()
         self.menuList = self.DBManager.LoadMenuList()
 
     def DisplayMenu(self):
-        testmenu = Menu(1, 2 ,3, 4)
-        tp = 0
-        for menu in self.menuList:
-            tp += menu.price
-
         pass
 
     def RemoveMenu(menu):

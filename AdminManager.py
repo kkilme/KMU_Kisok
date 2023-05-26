@@ -1,5 +1,7 @@
-class AdminManager:
-    def __init__(self) -> None:
+from Singleton import SingletonInstance
+
+class AdminManager(SingletonInstance):
+    def __init__(self):
         pass
 
     def Login():

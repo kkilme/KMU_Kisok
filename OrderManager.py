@@ -1,4 +1,6 @@
-class OrderManager:
+from Singleton import SingletonInstance
+
+class OrderManager(SingletonInstance):
     def __init__(self) -> None:
         pass
 
