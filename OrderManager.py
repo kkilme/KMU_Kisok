@@ -5,7 +5,7 @@ from MenuManager import MenuManager
 class OrderManager(SingletonInstance):
     def __init__(self) -> None:
         self.MenuManager = MenuManager()
-        self.cartList = []
+        self.cartDict = {}
         pass
 
     def getInstance():
@@ -34,15 +34,17 @@ class OrderManager(SingletonInstance):
         
     def AddToCart(self, itemNum):
         menu = self.MenuManager.menuList[itemNum-1]  #메뉴리스트에 있는 메뉴 객체 가져옴.
-        # 떡볶이 올테고, 수량 입력
         quantity = int(input("수량: "))
-        OrderItem = [menu, quantity]
-        self.cartList.append(OrderItem)
+
+        if menu in self.cartDict.keys():  #기존에 메뉴가 이미 추가되어있으면 수량 추가
+            self.cartDict[menu] = self.cartDict[menu]+quantity
+        else :
+            self.cartDict[menu] = quantity
 
     def PrintCart(self, UIDict):
         print(UIDict['cartscreen'], end="")
-        for i in self.cartList:
-            print("- {}({})".format(i[0].name, i[1]))
+        for i in self.cartDict:
+            print("- {}({})".format(i.name, self.cartDict[i]))
         print("\n\n")
 
 
