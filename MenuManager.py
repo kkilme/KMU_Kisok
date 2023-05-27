@@ -3,28 +3,29 @@ from DBManager import DBManager
 from Singleton import SingletonInstance
 
 class MenuManager(SingletonInstance):
+
     def __init__(self):
         self.DBManager = DBManager.instance()
-        self.menuListDB = self.DBManager.getMenuDB()  # menu dictionary 리턴
+        self.menuListDB = self.DBManager.getMenuDB()  # menu db 가져오기
         self.menuList = []
-
-    def GenerateMenu(self):
-        for i in self.menuListDB:
-            name = i
-            id = self.menuListDB[i]['id']
-            price = self.menuListDB[i]['price']
-            description = self.menuListDB[i]['description']
+        self.nextmenuid = self.DBManager.getNextMenuID()
+        self.GenerateMenulist()
+    
+    # menuDB로부터 menu객체를 생성하여 list 형성
+    def GenerateMenulist(self):
+        for menuname in self.menuListDB:
+            name = menuname
+            id = self.menuListDB[menuname]['id']
+            price = self.menuListDB[menuname]['price']
+            description = self.menuListDB[menuname]['description']
 
             item = Menu(name, id, price, description)
             self.menuList.append(item)
-        return self.menuList
 
-    def DisplayMenu(self, UIDict):
-        print(UIDict['menuscreen'], end="")
+    def DisplayMenu(self):
         for i in range(len(self.menuList)):
             item = self.menuList[i]
-            print("{}. [{}] {}원\n   : {}".format(i+1, item.name, item.price, item.description))
-        print("*****************************")
+            print(f"{i+1}. [{item.name}] {item.price}원\n   : {item.description}")
 
     def RemoveMenu(menu):
         pass
@@ -37,4 +38,7 @@ class MenuManager(SingletonInstance):
 
     def CreateMenu():
         pass
+
+    def getMenu(self, idx):
+        return self.menuList[idx]
 
