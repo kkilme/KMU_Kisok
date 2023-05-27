@@ -12,11 +12,13 @@ class OrderManager(SingletonInstance):
         pass
 
     def OrderMenu(self, UIDict):
+        self.MenuManager.GenerateMenu()
         self.MenuManager.DisplayMenu(UIDict)
         while(1):
             itemNum = int(input("메뉴 선택 : "))
             if itemNum == 0 :
-                print("clear cart")
+                self.ClearCart()
+                self.MenuManager.DisplayMenu(UIDict)
                 continue
             elif itemNum == -1 :
                 print("go to purchase")
@@ -52,9 +54,10 @@ class OrderManager(SingletonInstance):
     def RemoveFromCart(item):
         pass
 
-    def ClearCart():
-        pass
-
+    def ClearCart(self):
+        print("Clear Cart!\n")
+        self.cartDict.clear()
+        
     def MakeOrder():
         pass
 

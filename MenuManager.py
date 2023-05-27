@@ -17,9 +17,9 @@ class MenuManager(SingletonInstance):
 
             item = Menu(name, id, price, description)
             self.menuList.append(item)
+        return self.menuList
 
     def DisplayMenu(self, UIDict):
-        self.GenerateMenu()
         print(UIDict['menuscreen'], end="")
         for i in range(len(self.menuList)):
             item = self.menuList[i]
