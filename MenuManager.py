@@ -5,9 +5,10 @@ from Singleton import SingletonInstance
 class MenuManager(SingletonInstance):
     def __init__(self):
         self.DBManager = DBManager.instance()
-        self.menuList = self.DBManager.LoadMenuList()
+        self.menuList = self.DBManager.LoadMenuDB()
 
     def DisplayMenu(self):
+        print("DisplayMenu")
         pass
 
     def RemoveMenu(menu):

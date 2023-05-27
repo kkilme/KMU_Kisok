@@ -77,21 +77,3 @@ menulist = {
         'description': 'rr'
     }
 }
-
-print(menulist['rice']['price'])
-
-#dbfile name
-self.menufile = 'menu.dat'
-self.orderfile = 'order.dat'
-self.adminfile = 'admin.dat'
-
-# write
-menuData = open(self.menufile, 'wb')
-pickle.dump(menulist, menuData) # menulist를 menudata에 덮어쓰기
-menuData.close()
-
-#read
-
-menuData = open(self.menufile, 'rb')
-menulist2 = pickle.load(menuData)
-menuData.close()

@@ -7,7 +7,7 @@ class KioskSystem(SingletonInstance):
         pass
 
     def StartKioskSystem(self):
-        UIManager.MainScreen()
+        self.UIManager.MainScreen()
         pass
 
     def EndKioskSystem():
