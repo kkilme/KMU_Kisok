@@ -11,16 +11,14 @@ class UIManager(SingletonInstance):
         self.MenuManager = MenuManager()
         self.KioskHelper = KioskHelper()
         self.AdminManager = AdminManager()
-        pass
-
-
 
     def MainScreen(self):
         print(self.UIDict['mainscreen'])
         selectNum = int(input())
+        print()
 
         if selectNum == 1:  #메뉴 보기
-            self.MenuManager.DisplayMenu()
+            self.MenuManager.DisplayMenu(self.UIDict)
 
         elif selectNum == 2:  #언어 설정
             self.language = self.KioskHelper.SetKioskLanguage()
@@ -28,8 +26,6 @@ class UIManager(SingletonInstance):
                 self.UIDict = UI_KR
             else :
                 self.UIDict = UI_EN
-
-            print(self.language)
             self.MainScreen()
             
         elif selectNum == 3:  #직원 호출

@@ -1,10 +1,7 @@
 class Menu:
-    def __init__(self, id, price, name, desc) -> None:
+    def __init__(self, name, id, price, desc) -> None:
+        self.name = name
         self.id = id
         self.price = price
-        self.name = name
         self.description = desc
-    
-    
-
     

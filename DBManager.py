@@ -56,7 +56,19 @@ class DBManager(SingletonInstance):
         pass
     
     def getMenuDB(self):
-        return self.menuDB
+        menulist = {
+            '떡볶이': {
+                'id' : 1,
+                'price': 3500,
+                'description': '매콤달콤 추억의 간식!'
+            } ,
+            '라면': {
+                'id' : 2,
+                'price': 3000,
+                'description': '꼬들꼬들 면발!'
+            }
+        }
+        return menulist
     
     def getAdminDB(self):
         return self.adminDB
@@ -67,13 +79,3 @@ class DBManager(SingletonInstance):
 
 ### DB example
 
-menulist = {
-    'rice': {
-        'price': 1000,
-        'description': 'rr'
-    } ,
-    'rice2': {
-        'price': 1000,
-        'description': 'rr'
-    }
-}
