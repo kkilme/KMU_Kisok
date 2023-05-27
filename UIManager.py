@@ -20,7 +20,7 @@ class UIManager(SingletonInstance):
         print()
 
         if selectNum == 1:  #메뉴 보기
-            self.OrderManager.OrderMenu(self.UIDict)
+            self.OrderManager.MakeOrder(self.UIDict)
 
         elif selectNum == 2:  #언어 설정
             self.language = self.KioskHelper.SetKioskLanguage()
