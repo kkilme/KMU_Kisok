@@ -1,5 +1,6 @@
 from uitexts import *
 from MenuManager import MenuManager
+from OrderManager import OrderManager
 from KioskHelper import *
 from AdminManager import *
 from Singleton import SingletonInstance
@@ -11,6 +12,7 @@ class UIManager(SingletonInstance):
         self.MenuManager = MenuManager()
         self.KioskHelper = KioskHelper()
         self.AdminManager = AdminManager()
+        self.OrderManager = OrderManager()
 
     def MainScreen(self):
         print(self.UIDict['mainscreen'])
@@ -18,7 +20,7 @@ class UIManager(SingletonInstance):
         print()
 
         if selectNum == 1:  #메뉴 보기
-            self.MenuManager.DisplayMenu(self.UIDict)
+            self.OrderManager.OrderMenu(self.UIDict)
 
         elif selectNum == 2:  #언어 설정
             self.language = self.KioskHelper.SetKioskLanguage()

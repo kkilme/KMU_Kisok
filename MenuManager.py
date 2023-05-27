@@ -24,7 +24,7 @@ class MenuManager(SingletonInstance):
         for i in range(len(self.menuList)):
             item = self.menuList[i]
             print("{}. [{}] {}원\n   : {}".format(i+1, item.name, item.price, item.description))
-
+        print("*****************************")
 
     def RemoveMenu(menu):
         pass
