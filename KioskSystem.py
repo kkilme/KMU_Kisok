@@ -3,7 +3,7 @@ from Singleton import SingletonInstance
 
 class KioskSystem(SingletonInstance):
     def __init__(self) -> None:
-        self.UIManager = UIManager()
+        self.UIManager = UIManager.instance()
         pass
 
     def StartKioskSystem(self):

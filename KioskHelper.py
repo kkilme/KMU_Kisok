@@ -1,30 +1,22 @@
 import time
 from Singleton import SingletonInstance
-
 class KioskHelper(SingletonInstance):
     def __init__(self) -> None:
         pass
 
-    def getInstance():
-        pass
-
     def SetKioskLanguage(self):
-        print("Select : ( Korean / English )")
-        language = input()
+        num = input()
 
-        if language == 'EN' or language.upper() == 'ENGLISH':
+        if num == 2:
             return 'EN'
-        elif language == 'KR' or language.upper() == 'KOREAN':
+        else:
             return 'KR'
 
     def CallEmployee(self):
-        print("Do you need help from staff? (yes/no)")
-        ans = input()
-        if ans.upper() == 'YES' :
-            print("\n...Calling Manager.....waiting please...\n")
+        print("Do you need help from staff? 1: yes 2:no")
+        
+        if input() == '1' :
+            print("\n...Calling Manager...please wait...\n")
             time.sleep(2)
         else :
             print("Back")
-
-    def DisplayAvailableHelp():
-        pass
