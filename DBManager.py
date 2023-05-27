@@ -1,7 +1,9 @@
 import pickle
 from Singleton import SingletonInstance
 
-class DBManager(SingletonInstance):    
+class DBManager(SingletonInstance):
+
+
     def __init__(self):
         self.menufilename = 'menu.dat'
         self.orderhistoryfilename = 'orderhistory.dat'
@@ -10,7 +12,8 @@ class DBManager(SingletonInstance):
         self.menuDB = self.LoadMenuDB()
         self.orderhistoryDB = self.LoadOrderHistory()
         self.adminDB = self.LoadAdminDB()
-        
+    
+
     def SaveMenuDB(self, mlist):
         menudata = open(self.menufile, 'wb')
         pickle.dump(mlist, menudata) # mlist를 menudata에 덮어쓰기
@@ -75,7 +78,11 @@ class DBManager(SingletonInstance):
     
     def getOrderHistory(self):
         return self.orderhistoryDB
+    
+    def getNextOrderID(self):
+        return len(self.orderhistoryDB) + 1
+    
+    def getNextMenuID(self):
+        return len(self.menuDB) + 1
 
-
-### DB example
 
