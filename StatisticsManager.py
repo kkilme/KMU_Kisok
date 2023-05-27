@@ -1,6 +1,11 @@
-class StatisticsManager:
-    def __init__(self) -> None:
-        pass
+from Singleton import SingletonInstance
+from DBManager import DBManager
+from UIManager import UIManager
+
+class StatisticsManager(SingletonInstance):
+    def __init__(self):
+        self.DBManager = DBManager.instance()
+        self.UIManager = UIManager.instance()
 
     def GenerateOrderStatistics():
         pass

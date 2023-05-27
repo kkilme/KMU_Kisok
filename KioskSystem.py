@@ -1,6 +1,7 @@
 from UIManager import UIManager
+from Singleton import SingletonInstance
 
-class KioskSystem:
+class KioskSystem(SingletonInstance):
     def __init__(self) -> None:
         self.UIManager = UIManager()
         pass
@@ -20,5 +21,5 @@ class KioskSystem:
 
 
 if __name__ == '__main__':
-    kiosk = KioskSystem()
+    kiosk = KioskSystem.instance()
     kiosk.StartKioskSystem()

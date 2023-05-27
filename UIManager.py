@@ -2,8 +2,9 @@ from uitexts import *
 from MenuManager import MenuManager
 from KioskHelper import *
 from AdminManager import *
+from Singleton import SingletonInstance
 
-class UIManager:
+class UIManager(SingletonInstance):
     def __init__(self) -> None:
         self.language = 'KR'
         self.UIDict = UI_KR
