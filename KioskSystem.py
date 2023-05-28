@@ -4,20 +4,14 @@ from Singleton import SingletonInstance
 class KioskSystem(SingletonInstance):
     def __init__(self) -> None:
         self.UIManager = UIManager.instance()
-        pass
 
     def StartKioskSystem(self):
         self.UIManager.MainScreen()
-        pass
 
     def EndKioskSystem():
+        exit()
         pass
 
-    def DisplayMenuScreen():
-        pass
-
-    def EnterMenuScreen():
-        pass
 
 
 if __name__ == '__main__':

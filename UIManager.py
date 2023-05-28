@@ -4,6 +4,7 @@ from MenuManager import MenuManager
 from OrderManager import OrderManager
 from KioskHelper import KioskHelper
 from AdminManager import AdminManager
+from StatisticsManager import StatisticsManager
 from Singleton import SingletonInstance
 
 class UIManager(SingletonInstance):
@@ -14,6 +15,7 @@ class UIManager(SingletonInstance):
         self.KioskHelper = KioskHelper.instance()
         self.AdminManager = AdminManager.instance()
         self.OrderManager = OrderManager.instance()
+        self.StatisticsManager = StatisticsManager.instance()
 
     def MainScreen(self):
         print(self.UIDict['mainscreen'])
@@ -37,7 +39,7 @@ class UIManager(SingletonInstance):
             self.MainScreen()
 
         elif selectNum == 4:  #관리자 모드
-            self.AdminManager.Login()
+            self.AdminLoginScreen()
 
         else :
             print("Wrong input, please enter valid number")
@@ -93,3 +95,28 @@ class UIManager(SingletonInstance):
 
     def NumberTicketScreen(self):
         print(self.UIDict['numberticket'])
+
+    def AdminLoginScreen(self):
+        # 현재 비밀번호 1234!!
+        print('***관리자 모드***')
+        password = input('비밀번호를 입력하세요: ')
+        
+        if not self.AdminManager.Authenticate(password):
+            print("잘못된 비밀번호를 입력했습니다.")
+            time.sleep(1)
+            self.MainScreen()
+        
+        n = self.AdminManager.DisplayAvailableFunctions()
+        if n == 1:
+            self.AdminManager.ManageMenu()
+            time.sleep(2)
+        elif n == 2:
+            self.AdminManager.ViewStatistics()
+            time.sleep(2)
+        elif n == 3:
+            self.AdminManager.UpdateAccount()
+            time.sleep(2)
+        self.MainScreen()
+
+    def StatisticsScreen(self):
+        print(self.UIDict['statisticsmain'])
