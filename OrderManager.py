@@ -22,9 +22,13 @@ class OrderManager(SingletonInstance):
         orderid = self.nextorderid
         orderitems = copy.deepcopy(self.cartDict) # 깊은복사 해주어야 clearcart해도 내용이 사라지지 않음
         self.nextorderid+=1
-        istakeout = input("포장유무(O/X) : ")
-
-        neworder = Order(orderid, orderdate, orderitems, totalprice, istakeout.upper())
+        while True :
+            istakeout = input("포장유무(O/X) : ").upper()
+            if istakeout == 'O' or istakeout == 'X':
+                break
+            else:
+                print("wrong input! again please")
+        neworder = Order(orderid, orderdate, orderitems, totalprice, istakeout)
         self.currentOrder = neworder
 
         self.ClearCart()
