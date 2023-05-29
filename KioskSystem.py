@@ -10,7 +10,6 @@ class KioskSystem(SingletonInstance):
 
     def EndKioskSystem():
         exit()
-        pass
 
 
 

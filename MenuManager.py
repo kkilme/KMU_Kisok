@@ -22,23 +22,31 @@ class MenuManager(SingletonInstance):
             item = Menu(name, id, price, description)
             self.menuList.append(item)
 
-    def DisplayMenu(self):
-        for i in range(len(self.menuList)):
-            item = self.menuList[i]
-            print(f"{i+1}. [{item.name}] {item.price}원\n   : {item.description}")
+    def DisplayMenu(self, idx=-1):
+        if idx == -1:
+            for i in range(len(self.menuList)):
+                item = self.menuList[i]
+                print(f"{i+1}. [{item.name}] {item.price}원\n   : {item.description}")
+        else:
+            item = self.menuList[idx]
+            print(f"{idx+1}. [{item.name}] {item.price}원\n   : {item.description}")
 
-    def RemoveMenu(menu):
-        pass
+    def CreateMenu(self, name, price, desc):
+        newmenu = Menu(name, self.nextmenuid, price, desc)
+        self.menuList.append(newmenu)
+        self.nextmenuid +=1
+        self.DBManager.SaveMenuDB(self.menuList)
 
-    def AddMenu():
-        pass
+    def RemoveMenu(self, idx):
+        del self.menuList[idx]
+        self.DBManager.SaveMenuDB(self.menuList)
 
-    def EditMenu(menu):
-        pass
-
-    def CreateMenu():
-        pass
+    def EditMenu(self, idx, name, price, desc):
+        self.menuList[idx].UpdateMenu(name, price, desc)
+        self.DBManager.SaveMenuDB(self.menuList)
 
     def getMenu(self, idx):
         return self.menuList[idx]
 
+    def getMenuListLength(self):
+        return len(self.menuList)

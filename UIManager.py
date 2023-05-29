@@ -18,33 +18,36 @@ class UIManager(SingletonInstance):
         self.StatisticsManager = StatisticsManager.instance()
 
     def MainScreen(self):
-        print(self.UIDict['mainscreen'])
-        selectNum = int(input())
-        print()
+        while True:
+            print(self.UIDict['mainscreen'])
+            selectNum = int(input())
+            print()
 
-        if selectNum == 1:  #메뉴 보기
-            self.MenuScreen()
+            if selectNum == 1:  #메뉴 보기
+                self.MenuScreen()
 
-        elif selectNum == 2:  #언어 설정
-            print(self.UIDict['languageselect'])
-            self.language = self.KioskHelper.SetKioskLanguage()
-            if self.language == 'KR':
-                self.UIDict = UI_KR
+            elif selectNum == 2:  #언어 설정
+                print(self.UIDict['languageselect'])
+                language = self.KioskHelper.SetKioskLanguage()
+                if language == 'KR':
+                    self.language ='KR'
+                    self.UIDict = UI_KR
+                else :
+                    self.language ='EN'
+                    self.UIDict = UI_EN
+                continue
+                
+            elif selectNum == 3:  #직원 호출
+                self.KioskHelper.CallEmployee()
+                continue
+
+            elif selectNum == 4:  #관리자 모드
+                self.AdminLoginScreen()
+
             else :
-                self.UIDict = UI_EN
-            self.MainScreen()
-            
-        elif selectNum == 3:  #직원 호출
-            self.KioskHelper.CallEmployee()
-            self.MainScreen()
-
-        elif selectNum == 4:  #관리자 모드
-            self.AdminLoginScreen()
-
-        else :
-            print("Wrong input, please enter valid number")
-            time.sleep(2)
-            self.MainScreen()
+                print("Wrong input, please enter valid number")
+                time.sleep(2)
+                continue
 
     def MenuScreen(self):
         while True:
@@ -69,7 +72,6 @@ class UIManager(SingletonInstance):
                 self.OrderManager.MakeNumberTicket()
                 print("잠시 후 메인 화면으로 돌아갑니다...")
                 time.sleep(3)
-                self.MainScreen()
                 break
             elif itemNum == -1 :  #장바구니 비우기
                 self.OrderManager.ClearCart()
@@ -98,25 +100,23 @@ class UIManager(SingletonInstance):
 
     def AdminLoginScreen(self):
         # 현재 비밀번호 1234!!
-        print('***관리자 모드***')
-        password = input('비밀번호를 입력하세요: ')
-        
-        if not self.AdminManager.Authenticate(password):
-            print("잘못된 비밀번호를 입력했습니다.")
-            time.sleep(1)
-            self.MainScreen()
-        
-        n = self.AdminManager.DisplayAvailableFunctions()
-        if n == 1:
-            self.AdminManager.ManageMenu()
-            time.sleep(2)
-        elif n == 2:
-            self.AdminManager.ViewStatistics()
-            time.sleep(2)
-        elif n == 3:
-            self.AdminManager.UpdateAccount()
-            time.sleep(2)
-        self.MainScreen()
+        while True:
+            print('***관리자 모드***')
+            password = input('비밀번호를 입력하세요: ')
+            
+            if not self.AdminManager.Authenticate(password):
+                print("잘못된 비밀번호를 입력했습니다.")
+                time.sleep(1)
+                break
+            
+            n = self.AdminManager.DisplayAvailableFunctions()
+            if n == 1:
+                self.AdminManager.ManageMenu()
+            elif n == 2:
+                self.AdminManager.ViewStatistics()
+            elif n == 3:
+                self.AdminManager.UpdateAccount()
+            break
 
     def StatisticsScreen(self):
         print(self.UIDict['statisticsmain'])

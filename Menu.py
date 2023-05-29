@@ -4,6 +4,11 @@ class Menu:
         self.id = id
         self.price = price
         self.description = desc
+
+    def UpdateMenu(self, name, price, desc):
+        if name!='': self.name = name
+        if price!='': self.price = price
+        if desc!='': self.description = desc
     
     def __hash__(self): # 딕셔너리 키로 Menu객체를 사용하기 위해 구현
         return hash(self.name)

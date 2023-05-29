@@ -5,7 +5,7 @@ class KioskHelper(SingletonInstance):
         pass
 
     def SetKioskLanguage(self):
-        num = input()
+        num = int(input())
 
         if num == 2:
             return 'EN'

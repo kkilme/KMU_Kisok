@@ -1,4 +1,5 @@
 import pickle
+from datetime import datetime
 from Singleton import SingletonInstance
 
 class DBManager(SingletonInstance):
@@ -15,8 +16,16 @@ class DBManager(SingletonInstance):
     
 
     def SaveMenuDB(self, mlist):
+        menu_dict = {}
+        for menu in mlist:
+            menu_dict[menu.name] = {
+                'id': menu.id,
+                'price': menu.price,
+                'description': menu.description
+            }
+        
         menudata = open(self.menufilename, 'wb')
-        pickle.dump(mlist, menudata) # mlist를 menudata에 덮어쓰기
+        pickle.dump(menu_dict, menudata) # menudata에 덮어쓰기
         menudata.close()
 
     def LoadMenuDB(self):
@@ -29,12 +38,41 @@ class DBManager(SingletonInstance):
         menudata.close()
         return menulist
 
-    def UpdateOrderHistory(order):
-        pass
+    def UpdateOrderHistory(self, order):
+        orderhistory = self.orderhistoryDB
+        order_date = datetime.strptime(order.orderDate, '%Y-%m-%d %H:%M:%S')
+        order_date = order_date.strftime("%Y-%m-%d")  # 주문 날짜를 문자열 형식으로 변환
+        if order_date in orderhistory:  # 이미 해당 날짜의 주문이 존재하는 경우
+            for menu, quantity in order.orderItems.items():
+                menu_name = menu.name
+                if menu_name in orderhistory[order_date]:  # 이미 해당 메뉴의 주문이 존재하는 경우
+                    orderhistory[order_date][menu_name]['quantity'] += quantity
+                else:  # 해당 메뉴의 주문이 처음인 경우
+                    menu_price = menu.price
+                    orderhistory[order_date][menu_name] = {
+                        'quantity': quantity,
+                        'price': menu_price
+                    }
+        else:  # 해당 날짜의 주문이 처음인 경우
+            orderhistory[order_date] = {}
+            for menu, quantity in order.orderItems.items():
+                menu_name = menu.name
+                menu_price = menu.price
+                orderhistory[order_date][menu_name] = {
+                    'quantity': quantity,
+                    'price': menu_price
+                }
+        self.orderhistoryDB = orderhistory
+        self.SaveOrderHistory(orderhistory)
 
-    def SaveOrderHistory(self, orderlist):
+        print()
+        print("테스트용 출력: 현재 orderhistory")
+        print(orderhistory)
+        print()
+
+    def SaveOrderHistory(self, orderhistory):
         orderdata = open(self.orderhistoryfilename, 'wb')
-        pickle.dump(orderlist, orderdata)
+        pickle.dump(orderhistory, orderdata)
         orderdata.close()
 
     def LoadOrderHistory(self):

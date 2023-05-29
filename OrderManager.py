@@ -30,7 +30,7 @@ class OrderManager(SingletonInstance):
                 print("wrong input! again please")
         neworder = Order(orderid, orderdate, orderitems, totalprice, istakeout)
         self.currentOrder = neworder
-
+        self.DBManager.UpdateOrderHistory(neworder)
         self.ClearCart()
         
   
