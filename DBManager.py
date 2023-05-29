@@ -65,11 +65,6 @@ class DBManager(SingletonInstance):
         self.orderhistoryDB = orderhistory
         self.SaveOrderHistory(orderhistory)
 
-        print()
-        print("테스트용 출력: 현재 orderhistory")
-        print(orderhistory)
-        print()
-
     def SaveOrderHistory(self, orderhistory):
         orderdata = open(self.orderhistoryfilename, 'wb')
         pickle.dump(orderhistory, orderdata)
@@ -119,40 +114,40 @@ class DBManager(SingletonInstance):
     def getNextMenuID(self):
         return len(self.menuDB) + 1
 
+# for test
+# orderhistory = {
+#     '2023-05-29':{
+#         '떡볶이':{
+#             'quantity': 2,
+#             'price': 3500
+#         },
+#         '라면': {
+#             'quantity': 3,
+#             'price': 3000,
+#         }
+#     },
+#     '2023-05-30':{
+#         '떡볶이':{
+#             'quantity': 2,
+#             'price': 3500
+#         }
+#     }
+# }
 
-orderhistory = {
-    '2023-05-29':{
-        '떡볶이':{
-            'quantity': 2,
-            'price': 3500
-        },
-        '라면': {
-            'quantity': 3,
-            'price': 3000,
-        }
-    },
-    '2023-05-30':{
-        '떡볶이':{
-            'quantity': 2,
-            'price': 3500
-        }
-    }
-}
+# menulist = {
+#             '떡볶이': {
+#                 'id' : 1,
+#                 'price': 3500,
+#                 'description': '매콤달콤 추억의 간식!'
+#             } ,
+#             '라면': {
+#                 'id' : 2,
+#                 'price': 3000,
+#                 'description': '꼬들꼬들 면발!'
+#             }
+#         }
 
-menulist = {
-            '떡볶이': {
-                'id' : 1,
-                'price': 3500,
-                'description': '매콤달콤 추억의 간식!'
-            } ,
-            '라면': {
-                'id' : 2,
-                'price': 3000,
-                'description': '꼬들꼬들 면발!'
-            }
-        }
-
-admin = '0000' #비밀번호
+# admin = '0000' #비밀번호
 
 # if __name__ == '__main__':
 #     db = DBManager.instance()
