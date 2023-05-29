@@ -96,7 +96,7 @@ class UIManager(SingletonInstance):
     def NumberTicketScreen(self):
         print(self.UIDict['numberticket'])
 
-    def AdminLoginScreen(self):
+    def AdminScreen(self):
         # 현재 비밀번호 1234!!
         while True:
             print('***관리자 모드***')
@@ -115,6 +115,3 @@ class UIManager(SingletonInstance):
             elif n == 3:
                 self.AdminManager.UpdateAccount()
             break
-
-    def StatisticsScreen(self):
-        print(self.UIDict['statisticsmain'])

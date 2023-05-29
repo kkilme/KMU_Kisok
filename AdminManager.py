@@ -10,12 +10,6 @@ class AdminManager(SingletonInstance):
         self.MenuManager = MenuManager.instance()
         self.StatisticsManager = StatisticsManager.instance()
 
-    def Login():
-        pass
-
-    def Logout():
-        pass
-
     def Authenticate(self, password):
         dbpassword = self.DBManager.getAdminDB()
         if password == dbpassword:
@@ -98,7 +92,7 @@ class AdminManager(SingletonInstance):
                     print("수정할 메뉴: ")
                     self.MenuManager.DisplayMenu(idx=idx)
                     newname = input("새로운 이름을 입력하세요. (유지 원할 시 공백입력): ")
-                    newprice = input("새로운 가격을 입력하세요. (유지 원할 시 공백입력): ")
+                    newprice = int(input("새로운 가격을 입력하세요. (유지 원할 시 공백입력): "))
                     newdesc = input("새로운 설명을 입력하세요. (유지 원할 시 공백입력): ")
                     self.MenuManager.EditMenu(idx, newname, newprice, newdesc)
                     print("성공적으로 메뉴를 수정했습니다.")
