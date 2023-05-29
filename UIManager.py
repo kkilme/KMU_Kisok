@@ -4,7 +4,6 @@ from MenuManager import MenuManager
 from OrderManager import OrderManager
 from KioskHelper import KioskHelper
 from AdminManager import AdminManager
-from StatisticsManager import StatisticsManager
 from Singleton import SingletonInstance
 
 class UIManager(SingletonInstance):
@@ -15,7 +14,6 @@ class UIManager(SingletonInstance):
         self.KioskHelper = KioskHelper.instance()
         self.AdminManager = AdminManager.instance()
         self.OrderManager = OrderManager.instance()
-        self.StatisticsManager = StatisticsManager.instance()
 
     def MainScreen(self):
         while True:
