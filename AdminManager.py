@@ -67,6 +67,11 @@ class AdminManager(SingletonInstance):
 
             if n==1: #메뉴 추가
                 print("메뉴를 추가합니다.")
+                menutype = input("메뉴 타입을 입력하세요(Drink 또는 Food): ")
+                if menutype.lower() != 'drink' and menutype.lower() != 'food':
+                    print("잘못된 메뉴 타입입니다.")
+                    time.sleep(1)
+                    continue
                 menuname = input("메뉴 이름을 입력하세요: ")
                 menuprice = input("메뉴 가격을 입력하세요: ")
                 try:
@@ -77,7 +82,7 @@ class AdminManager(SingletonInstance):
                     continue
                 menudesc = input("메뉴 설명을 입력하세요: ")
 
-                self.MenuManager.CreateMenu(menuname, menuprice, menudesc)
+                self.MenuManager.CreateMenu(menuname, menuprice, menudesc, menutype)
 
                 print("성공적으로 메뉴를 추가했습니다.")
                 time.sleep(1)
@@ -91,10 +96,15 @@ class AdminManager(SingletonInstance):
                 else:
                     print("수정할 메뉴: ")
                     self.MenuManager.DisplayMenu(idx=idx)
+                    newmenutype = input("새로운 메뉴 타입을 입력하세요(Drink 또는 Food) (유지 원할 시 공백입력): ")
+                    if menutype.lower() != 'drink' and menutype.lower() != 'food':
+                        print("잘못된 메뉴 타입입니다.")
+                        time.sleep(1)
+                        continue
                     newname = input("새로운 이름을 입력하세요. (유지 원할 시 공백입력): ")
                     newprice = int(input("새로운 가격을 입력하세요. (유지 원할 시 공백입력): "))
                     newdesc = input("새로운 설명을 입력하세요. (유지 원할 시 공백입력): ")
-                    self.MenuManager.EditMenu(idx, newname, newprice, newdesc)
+                    self.MenuManager.EditMenu(idx, newname, newprice, newdesc, newmenutype)
                     print("성공적으로 메뉴를 수정했습니다.")
                     time.sleep(1)
 

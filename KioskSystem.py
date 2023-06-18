@@ -7,7 +7,7 @@ class KioskSystem():
     def StartKioskSystem(self):
         self.UIManager.MainScreen()
 
-    def EndKioskSystem():
+    def EndKioskSystem(self):
         exit()
 
 
@@ -15,3 +15,4 @@ class KioskSystem():
 if __name__ == '__main__':
     kiosk = KioskSystem()
     kiosk.StartKioskSystem()
+    kiosk.EndKioskSystem()

@@ -21,7 +21,8 @@ class DBManager(SingletonInstance):
             menu_dict[menu.name] = {
                 'id': menu.id,
                 'price': menu.price,
-                'description': menu.description
+                'description': menu.description,
+                'menutype': menu.menutype
             }
         
         menudata = open(self.menufilename, 'wb')

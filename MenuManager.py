@@ -1,6 +1,7 @@
 from Menu import Menu
 from DBManager import DBManager
 from Singleton import SingletonInstance
+from MenuFactory import MenuFactory
 
 class MenuManager(SingletonInstance):
 
@@ -18,21 +19,21 @@ class MenuManager(SingletonInstance):
             id = self.menuListDB[menuname]['id']
             price = self.menuListDB[menuname]['price']
             description = self.menuListDB[menuname]['description']
-
-            item = Menu(name, id, price, description)
+            menutype = self.menuListDB[menuname]['menutype']
+            item = MenuFactory.CreateMenu(name, id, price, description, menutype)
             self.menuList.append(item)
 
     def DisplayMenu(self, idx=-1):
         if idx == -1:
             for i in range(len(self.menuList)):
                 item = self.menuList[i]
-                print(f"{i+1}. [{item.name}] {item.price}원\n   : {item.description}")
+                print(f"{i+1}. ({item.menutype}) [{item.name}] {item.price}원\n   : {item.description}")
         else:
             item = self.menuList[idx]
             print(f"{idx+1}. [{item.name}] {item.price}원\n   : {item.description}")
 
-    def CreateMenu(self, name, price, desc):
-        newmenu = Menu(name, self.nextmenuid, price, desc)
+    def CreateMenu(self, name, price, desc, menutype):
+        newmenu = MenuFactory.CreateMenu(name, self.nextmenuid, price, desc, menutype)
         self.menuList.append(newmenu)
         self.nextmenuid +=1
         self.DBManager.SaveMenuDB(self.menuList)
@@ -41,8 +42,8 @@ class MenuManager(SingletonInstance):
         del self.menuList[idx]
         self.DBManager.SaveMenuDB(self.menuList)
 
-    def EditMenu(self, idx, name, price, desc):
-        self.menuList[idx].UpdateMenu(name, price, desc)
+    def EditMenu(self, idx, name, price, desc, menutype):
+        self.menuList[idx].UpdateMenu(name, price, desc,menutype)
         self.DBManager.SaveMenuDB(self.menuList)
 
     def getMenu(self, idx):

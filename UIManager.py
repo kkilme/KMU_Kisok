@@ -40,8 +40,17 @@ class UIManager(SingletonInstance):
                 continue
 
             elif selectNum == 4:  #관리자 모드
-                self.AdminLoginScreen()
+                self.AdminScreen()
 
+            elif selectNum == 5:
+                password = input('관리자 비밀번호를 입력하세요: ')
+            
+                if not self.AdminManager.Authenticate(password):
+                    print("잘못된 비밀번호를 입력했습니다.")
+                    time.sleep(1)
+                    continue
+                print("키오스크 시스템을 종료합니다...")
+                break
             else :
                 print("Wrong input, please enter valid number")
                 time.sleep(2)
@@ -65,9 +74,7 @@ class UIManager(SingletonInstance):
                 self.OrderManager.MakeOrder()
                 self.OrderManager.ProcessPayment()
                 self.ReceiptScreen()
-                self.OrderManager.MakeReceipt()
                 self.NumberTicketScreen()
-                self.OrderManager.MakeNumberTicket()
                 print("잠시 후 메인 화면으로 돌아갑니다...")
                 time.sleep(3)
                 break
@@ -82,19 +89,22 @@ class UIManager(SingletonInstance):
                     continue
                 self.OrderManager.RemoveFromCart(idx)
                 continue
+
             if itemNum < 0 or itemNum >len(self.MenuManager.menuList) :
                 print("Wrong input! Please try again!")
                 time.sleep(2)
-            else:
+            else: # 장바구니에 메뉴 추가
                 selectedMenu = self.MenuManager.getMenu(itemNum-1)
                 quantity = int(input("수량: "))
                 self.OrderManager.AddToCart(selectedMenu, quantity)
 
     def ReceiptScreen(self):
         print(self.UIDict['receiptscreen'])
+        self.OrderManager.MakeReceipt()
 
     def NumberTicketScreen(self):
         print(self.UIDict['numberticket'])
+        self.OrderManager.MakeNumberTicket()
 
     def AdminScreen(self):
         # 현재 비밀번호 1234!!
