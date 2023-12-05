@@ -1,14 +1,10 @@
 import time
 from Singleton import SingletonInstance
-from DBManager import DBManager
-from MenuManager import MenuManager
-from StatisticsManager import StatisticsManager
+from AdminDAO import AdminDAO
 
 class AdminManager(SingletonInstance):
     def __init__(self):
-        self.DBManager = DBManager.instance()
-        self.MenuManager = MenuManager.instance()
-        self.StatisticsManager = StatisticsManager.instance()
+        self.AdminDAO = AdminDAO.instance()
 
     def Authenticate(self, password):
         dbpassword = self.DBManager.getAdminDB()
