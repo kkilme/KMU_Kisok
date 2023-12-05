@@ -36,277 +36,435 @@
   <property name="windowTitle">
    <string>KookminKiosk</string>
   </property>
+  <property name="toolTip">
+   <string notr="true"/>
+  </property>
+  <property name="statusTip">
+   <string notr="true"/>
+  </property>
+  <property name="whatsThis">
+   <string notr="true"/>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
     <bool>false</bool>
    </property>
-   <widget class="QPushButton" name="PurchaseButton">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>620</y>
-      <width>161</width>
-      <height>51</height>
+      <x>0</x>
+      <y>0</y>
+      <width>601</width>
+      <height>801</height>
      </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>나눔바른고딕</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>결제하기</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="TotalPriceLabel">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>570</y>
-      <width>191</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>나눔바른고딕</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>총 금액: </string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ResetShoppingcartButton">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>680</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>나눔바른고딕</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>장바구니 초기화</string>
-    </property>
-   </widget>
-   <widget class="QTabWidget" name="MenuTab">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>581</width>
-      <height>551</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:rgb(254, 255, 178)</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <widget class="QWidget" name="tab">
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <attribute name="title">
-      <string>음식</string>
-     </attribute>
-     <widget class="QWidget" name="gridLayoutWidget">
+    <widget class="QWidget" name="page">
+     <widget class="QTabWidget" name="MenuTab">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>571</width>
+        <width>581</width>
         <height>521</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="MenuGrid" rowstretch="0" columnstretch="0">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(254, 255, 178)</string>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="tab">
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
-       <property name="bottomMargin">
+       <attribute name="title">
+        <string>음식</string>
+       </attribute>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>571</width>
+          <height>491</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="MenuGrid" rowstretch="0" columnstretch="0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+          <widget class="QPushButton" name="MenuButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>120</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>나눔바른고딕</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:white</string>
+           </property>
+           <property name="text">
+            <string>TestMenu1 
+
+ 2,000원</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>음료</string>
+       </attribute>
+       <widget class="QWidget" name="gridLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>571</width>
+          <height>491</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="MenuGrid_2" rowstretch="0" columnstretch="0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="MenuButton_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>140</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>나눔바른고딕</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:white</string>
+           </property>
+           <property name="text">
+            <string>TestMenu1 
+
+ 2,000원</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>세트</string>
+       </attribute>
+       <widget class="QWidget" name="gridLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>571</width>
+          <height>491</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="MenuGrid_3" rowstretch="0" columnstretch="0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="MenuButton_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>140</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>나눔바른고딕</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:white</string>
+           </property>
+           <property name="text">
+            <string>TestMenu1 
+
+ 2,000원</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>540</y>
+        <width>221</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
+       <property name="spacing">
+        <number>7</number>
+       </property>
+       <property name="leftMargin">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="MenuButton">
+       <item>
+        <widget class="QLabel" name="TotalPriceLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>나눔바른고딕</family>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>총 금액: </string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="PurchaseButton">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>140</height>
+           <width>150</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>162</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>나눔바른고딕</family>
-           <pointsize>10</pointsize>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
+         <property name="statusTip">
+          <string notr="true"/>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color:white</string>
+          <string notr="true"/>
          </property>
          <property name="text">
-          <string>TestMenu1 
-
- 2,000원</string>
+          <string notr="true">결제하기</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="ResetShoppingcartButton">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>나눔바른고딕</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>장바구니 초기화</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="ResetShoppingcartButton_2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>나눔바른고딕</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>주문 취소</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>음료</string>
-     </attribute>
-     <widget class="QWidget" name="gridLayoutWidget_2">
+     <widget class="QTableView" name="tableView">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>571</width>
-        <height>521</height>
+        <x>10</x>
+        <y>540</y>
+        <width>341</width>
+        <height>251</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="MenuGrid_2" rowstretch="0" columnstretch="0">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>411</width>
+        <height>601</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>150</number>
        </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="MenuButton_2">
+       <item>
+        <widget class="QLabel" name="KioskTitle">
+         <property name="font">
+          <font>
+           <family>나눔바른고딕</family>
+           <pointsize>33</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Kookmin Kiosk</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="StartOrderButton">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>140</height>
+           <width>200</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
           </size>
          </property>
          <property name="font">
           <font>
            <family>나눔바른고딕</family>
-           <pointsize>10</pointsize>
+           <pointsize>13</pointsize>
           </font>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color:white</string>
-         </property>
          <property name="text">
-          <string>TestMenu1 
-
- 2,000원</string>
+          <string>주문 시작하기</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>쪽</string>
-     </attribute>
-     <widget class="QWidget" name="gridLayoutWidget_3">
+     <widget class="QPushButton" name="AdminButton">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>571</width>
-        <height>521</height>
+        <x>480</x>
+        <y>750</y>
+        <width>93</width>
+        <height>28</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="MenuGrid_3" rowstretch="0" columnstretch="0">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="MenuButton_3">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>140</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>나눔바른고딕</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color:white</string>
-         </property>
-         <property name="text">
-          <string>TestMenu1 
-
- 2,000원</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <property name="text">
+       <string>관리자 도구</string>
+      </property>
      </widget>
     </widget>
-   </widget>
-   <widget class="QPushButton" name="ResetShoppingcartButton_2">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>740</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>나눔바른고딕</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>주문 취소</string>
-    </property>
    </widget>
   </widget>
  </widget>
