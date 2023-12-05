@@ -16,7 +16,7 @@ class KioskSystem():
         self.KioskUI.show()
         self.app.exec_()
 
-
+# ₩
 if __name__ == '__main__':
     kiosk = KioskSystem()
     kiosk.StartKioskSystem()

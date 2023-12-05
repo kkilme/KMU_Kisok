@@ -2,9 +2,9 @@
 from PySide2.QtGui import QFont
 from PySide2.QtWidgets import QPushButton
 
-class OrderMenuButton(QPushButton):
+class MenuButton(QPushButton):
     def __init__(self, text='', parent=None):
-        super(OrderMenuButton, self).__init__(text, parent)
+        super(MenuButton, self).__init__(text, parent)
         self.initUI()
 
     def initUI(self):

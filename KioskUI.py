@@ -3,12 +3,13 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 import sys
 from KioskPresenter import KioskPresenter
-from OrderMenuButton import OrderMenuButton
+
 
 class KioskUI(QMainWindow):
     def __init__(self) -> None:
         super(KioskUI, self).__init__()
         self.presenter = None
+        self.menugridSize = 5
     
     def assignPresenter(self, presenter: KioskPresenter):
         self.presenter = presenter
@@ -77,26 +78,32 @@ class KioskUI(QMainWindow):
         self.foodmenutab = QWidget()
         self.foodgridLayoutWidget = QWidget(self.foodmenutab)
         self.foodgridLayoutWidget.setGeometry(QRect(0, 0, 570, 490))
-        self.MenuGrid = QGridLayout(self.foodgridLayoutWidget)
+        self.FoodGrid = QGridLayout(self.foodgridLayoutWidget)
 
-        self.testbutton = OrderMenuButton("test1\n\n2,000", self.foodgridLayoutWidget)
-        
-        self.MenuGrid.addWidget(self.testbutton, 0,0,1,1, Qt.AlignHCenter|Qt.AlignVCenter)
+        # self.testbutton = OrderMenuButton("test1\n\n2,000", self.foodgridLayoutWidget)
+        # self.replaceDummyWidget(self.FoodGrid, self.testbutton, 0, 1)
+        # self.testbutton2 = OrderMenuButton("test1\n\n2,000", self.foodgridLayoutWidget)
+        # self.replaceDummyWidget(self.FoodGrid, self.testbutton2, 0, 0)
+        # self.MenuGrid.addWidget(self.testbutton, 0,0,1,1, Qt.AlignHCenter|Qt.AlignVCenter)
         self.MenuTab.addTab(self.foodmenutab, "Food")
         
         self.drinkmenutab = QWidget()
         self.foodgridLayoutWidget2 = QWidget(self.drinkmenutab)
         self.foodgridLayoutWidget2.setGeometry(QRect(0, 0, 570, 490))
-        self.MenuGrid2 = QGridLayout(self.foodgridLayoutWidget2)
+        self.DrinkGrid = QGridLayout(self.foodgridLayoutWidget2)
 
         self.MenuTab.addTab(self.drinkmenutab, "Drink")
         
         self.setmenutab = QWidget()
         self.foodgridLayoutWidget3 = QWidget(self.setmenutab)
         self.foodgridLayoutWidget3.setGeometry(QRect(0, 0, 570, 490))
-        self.MenuGrid3 = QGridLayout(self.foodgridLayoutWidget3)
+        self.SetGrid = QGridLayout(self.foodgridLayoutWidget3)
 
         self.MenuTab.addTab(self.setmenutab, "Set")
+        
+        self.fillDummyWidgetOnGrid(self.FoodGrid)
+        self.fillDummyWidgetOnGrid(self.DrinkGrid)
+        self.fillDummyWidgetOnGrid(self.SetGrid)
         
         # Total Price ============================================
         
@@ -147,12 +154,29 @@ class KioskUI(QMainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.MenuTab.setCurrentIndex(0)
         
+        # ============================
+        self.presenter.loadMenu()
+
+    def fillDummyWidgetOnGrid(self, grid: QGridLayout):
+        for row in range(self.menugridSize):
+            for col in range(self.menugridSize):
+                dummy = DummyWidget(self)
+                grid.addWidget(dummy, row, col)
+        
+    def replaceWidget(self, grid:QGridLayout, newwidget:QPushButton, y, x):
+        oldwidget = grid.itemAtPosition(x, y).widget()
+        grid.removeWidget(oldwidget)
+        oldwidget.deleteLater()  # 위젯 삭제
+        grid.addWidget(newwidget, x, y)
+        
     def changeUI(self):
         if self.stackedWidget.currentIndex() == 0:
             self.stackedWidget.setCurrentIndex(1)
         else:
             self.stackedWidget.setCurrentIndex(0)
-
+            
+class DummyWidget(QWidget):
+    pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

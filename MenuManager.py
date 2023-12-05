@@ -1,7 +1,7 @@
 from OrderDAO import OrderDAO
 from MenuDAO import MenuDAO
 from Singleton import SingletonInstance
-
+from Menu import Menu, Menutype, stringToMenutype
 
 class MenuManager(SingletonInstance):
 
@@ -10,8 +10,19 @@ class MenuManager(SingletonInstance):
         self.MenuDAO = MenuDAO.instance()
         # self.menuListDB = self.DBManager.getMenuDB()  # menu db 가져오기
         self.menuList = []
-        # self.nextmenuid = self.DBManager.getNextMenuID()
-        # self.GenerateMenulist()
+        self.loadMenu()
+    
+    # menuDAO로부터 메뉴를 읽어와 menu list 생성
+    def loadMenu(self):
+        self.menuList.clear()
+        data = self.MenuDAO.getMenuDB()
+        for menuid, name, price, menutype in data:
+            menu = Menu(menuid, name, price, stringToMenutype(menutype))
+            self.menuList.append(menu)
+
+    def getMenuList(self) -> list[Menu]:
+        return self.menuList
+    
     
     # menuDB로부터 menu객체를 생성하여 list 형성
     # def GenerateMenulist(self):

@@ -13,6 +13,10 @@ class MenuDAO(SingletonInstance):
         return conn, cursor
     
     def getMenuDB(self):
+        return ((1, '라면', 5000, 'Food'),  (2, '김밥', 1500, 'Food'), (3, '떡볶이', 2000, 'Food'), 
+ (4, '순대', 2000, 'Food'), (5, '사이다', 1000, 'Drink'), (6, '콜라', 1000, 'Drink'), 
+(7, '환타', 1000, 'Drink'), (8, '라면+김밥', 6000, 'Set'), (9, '라면+순대', 6500, 'Set'), 
+ (10, '김밥+떡볶이', 2500, 'Set'))
         conn, cursor = self.connectDB()
 
         sql = "SELECT * FROM kookminkiosk.menu;" 
@@ -21,7 +25,9 @@ class MenuDAO(SingletonInstance):
         res = cursor.fetchall()
         
         conn.commit() 
-        conn.close() 
+        conn.close()
+        
+        return res
 
 # 응답 예시
 #((1, '라면', 5000, 'Food'),  (2, '김밥', 1500, 'Food'), (3, '떡볶이', 2000, 'Food'), 
