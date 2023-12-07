@@ -62,23 +62,23 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QTabWidget" name="MenuTab">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>581</width>
-        <height>521</height>
+        <x>20</x>
+        <y>10</y>
+        <width>561</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color:rgb(254, 255, 178)</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -98,8 +98,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>571</width>
-          <height>491</height>
+          <width>551</width>
+          <height>481</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="MenuGrid" rowstretch="0" columnstretch="0">
@@ -109,7 +109,7 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <item row="0" column="0">
           <widget class="QPushButton" name="MenuButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -151,8 +151,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>571</width>
-          <height>491</height>
+          <width>551</width>
+          <height>481</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="MenuGrid_2" rowstretch="0" columnstretch="0">
@@ -204,8 +204,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>571</width>
-          <height>491</height>
+          <width>551</width>
+          <height>481</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="MenuGrid_3" rowstretch="0" columnstretch="0">
@@ -253,9 +253,9 @@
       <property name="geometry">
        <rect>
         <x>360</x>
-        <y>540</y>
+        <y>580</y>
         <width>221</width>
-        <height>251</height>
+        <height>211</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
@@ -375,14 +375,38 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTableView" name="tableView">
+     <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>540</y>
+        <y>580</y>
         <width>341</width>
-        <height>251</height>
+        <height>211</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>530</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>나눔바른고딕</family>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>장바구니</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>

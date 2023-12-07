@@ -12,9 +12,8 @@ class KioskSystem():
         self.KioskUI.initStartUI()
 
     def StartKioskSystem(self):
-        # app = QApplication(sys.argv)
         self.KioskUI.show()
-        self.app.exec_()
+        sys.exit(self.app.exec_())
 
 # ₩
 if __name__ == '__main__':

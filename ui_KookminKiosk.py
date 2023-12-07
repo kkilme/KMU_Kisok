@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'KookminKioskkcPhVg.ui'
+## Form generated from reading UI file 'KookminKioskJiwoge.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -38,7 +38,6 @@ class Ui_KookminKiosk(object):
         KookminKiosk.setWhatsThis(u"")
 #endif // QT_CONFIG(whatsthis)
         KookminKiosk.setTabShape(QTabWidget.Rounded)
-        
         self.centralwidget = QWidget(KookminKiosk)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setAutoFillBackground(False)
@@ -49,7 +48,7 @@ class Ui_KookminKiosk(object):
         self.page.setObjectName(u"page")
         self.MenuTab = QTabWidget(self.page)
         self.MenuTab.setObjectName(u"MenuTab")
-        self.MenuTab.setGeometry(QRect(0, 0, 581, 521))
+        self.MenuTab.setGeometry(QRect(20, 10, 561, 511))
         self.MenuTab.setStyleSheet(u"background-color:rgb(254, 255, 178)")
         self.MenuTab.setIconSize(QSize(20, 20))
         self.tab = QWidget()
@@ -57,7 +56,7 @@ class Ui_KookminKiosk(object):
         self.tab.setStyleSheet(u"")
         self.gridLayoutWidget = QWidget(self.tab)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 0, 571, 491))
+        self.gridLayoutWidget.setGeometry(QRect(0, 0, 551, 481))
         self.MenuGrid = QGridLayout(self.gridLayoutWidget)
         self.MenuGrid.setObjectName(u"MenuGrid")
         self.MenuGrid.setSizeConstraint(QLayout.SetDefaultConstraint)
@@ -76,14 +75,14 @@ class Ui_KookminKiosk(object):
         self.MenuButton.setFont(font1)
         self.MenuButton.setStyleSheet(u"background-color:white")
 
-        self.MenuGrid.addWidget(self.MenuButton, 0, 0, 1, 1, Qt.AlignHCenter|Qt.AlignVCenter)
+        self.MenuGrid.addWidget(self.MenuButton, 0, 0, 1, 1)
 
         self.MenuTab.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.gridLayoutWidget_2 = QWidget(self.tab_2)
         self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
-        self.gridLayoutWidget_2.setGeometry(QRect(0, 0, 571, 491))
+        self.gridLayoutWidget_2.setGeometry(QRect(0, 0, 551, 481))
         self.MenuGrid_2 = QGridLayout(self.gridLayoutWidget_2)
         self.MenuGrid_2.setObjectName(u"MenuGrid_2")
         self.MenuGrid_2.setSizeConstraint(QLayout.SetDefaultConstraint)
@@ -103,7 +102,7 @@ class Ui_KookminKiosk(object):
         self.tab_3.setObjectName(u"tab_3")
         self.gridLayoutWidget_3 = QWidget(self.tab_3)
         self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
-        self.gridLayoutWidget_3.setGeometry(QRect(0, 0, 571, 491))
+        self.gridLayoutWidget_3.setGeometry(QRect(0, 0, 551, 481))
         self.MenuGrid_3 = QGridLayout(self.gridLayoutWidget_3)
         self.MenuGrid_3.setObjectName(u"MenuGrid_3")
         self.MenuGrid_3.setSizeConstraint(QLayout.SetDefaultConstraint)
@@ -119,10 +118,9 @@ class Ui_KookminKiosk(object):
         self.MenuGrid_3.addWidget(self.MenuButton_3, 0, 0, 1, 1)
 
         self.MenuTab.addTab(self.tab_3, "")
-        
         self.verticalLayoutWidget = QWidget(self.page)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(360, 540, 221, 251))
+        self.verticalLayoutWidget.setGeometry(QRect(360, 580, 221, 211))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setSpacing(7)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -158,7 +156,7 @@ class Ui_KookminKiosk(object):
 #if QT_CONFIG(statustip)
         self.PurchaseButton.setStatusTip(u"")
 #endif // QT_CONFIG(statustip)
-        self.PurchaseButton.setStyleSheet(u"alignment:Vcenter")
+        self.PurchaseButton.setStyleSheet(u"")
         self.PurchaseButton.setText(u"\uacb0\uc81c\ud558\uae30")
 
         self.verticalLayout.addWidget(self.PurchaseButton, 0, Qt.AlignHCenter)
@@ -177,11 +175,20 @@ class Ui_KookminKiosk(object):
 
         self.verticalLayout.addWidget(self.ResetShoppingcartButton_2, 0, Qt.AlignHCenter)
 
-        self.tableView = QTableView(self.page)
-        self.tableView.setObjectName(u"tableView")
-        self.tableView.setGeometry(QRect(10, 540, 341, 251))
+        self.tableWidget = QTableWidget(self.page)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setGeometry(QRect(10, 580, 341, 211))
+        self.label = QLabel(self.page)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(90, 530, 191, 41))
+        font4 = QFont()
+        font4.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
+        font4.setPointSize(17)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.label.setFont(font4)
+        self.label.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(self.page)
-        
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
         self.verticalLayoutWidget_2 = QWidget(self.page_2)
@@ -191,15 +198,14 @@ class Ui_KookminKiosk(object):
         self.verticalLayout_2.setSpacing(150)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        
         self.KioskTitle = QLabel(self.verticalLayoutWidget_2)
         self.KioskTitle.setObjectName(u"KioskTitle")
-        font4 = QFont()
-        font4.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
-        font4.setPointSize(33)
-        font4.setBold(True)
-        font4.setWeight(75)
-        self.KioskTitle.setFont(font4)
+        font5 = QFont()
+        font5.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
+        font5.setPointSize(33)
+        font5.setBold(True)
+        font5.setWeight(75)
+        self.KioskTitle.setFont(font5)
         self.KioskTitle.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.KioskTitle)
@@ -210,10 +216,10 @@ class Ui_KookminKiosk(object):
         self.StartOrderButton.setSizePolicy(sizePolicy2)
         self.StartOrderButton.setMinimumSize(QSize(200, 80))
         self.StartOrderButton.setMaximumSize(QSize(16777215, 16777215))
-        font5 = QFont()
-        font5.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
-        font5.setPointSize(13)
-        self.StartOrderButton.setFont(font5)
+        font6 = QFont()
+        font6.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
+        font6.setPointSize(13)
+        self.StartOrderButton.setFont(font6)
 
         self.verticalLayout_2.addWidget(self.StartOrderButton, 0, Qt.AlignHCenter)
 
@@ -225,8 +231,8 @@ class Ui_KookminKiosk(object):
 
         self.retranslateUi(KookminKiosk)
 
-        self.stackedWidget.setCurrentIndex(1)
-        self.MenuTab.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(0)
+        self.MenuTab.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(KookminKiosk)
@@ -249,6 +255,7 @@ class Ui_KookminKiosk(object):
         self.TotalPriceLabel.setText(QCoreApplication.translate("KookminKiosk", u"\ucd1d \uae08\uc561: ", None))
         self.ResetShoppingcartButton.setText(QCoreApplication.translate("KookminKiosk", u"\uc7a5\ubc14\uad6c\ub2c8 \ucd08\uae30\ud654", None))
         self.ResetShoppingcartButton_2.setText(QCoreApplication.translate("KookminKiosk", u"\uc8fc\ubb38 \ucde8\uc18c", None))
+        self.label.setText(QCoreApplication.translate("KookminKiosk", u"\uc7a5\ubc14\uad6c\ub2c8", None))
         self.KioskTitle.setText(QCoreApplication.translate("KookminKiosk", u"Kookmin Kiosk", None))
         self.StartOrderButton.setText(QCoreApplication.translate("KookminKiosk", u"\uc8fc\ubb38 \uc2dc\uc791\ud558\uae30", None))
         self.AdminButton.setText(QCoreApplication.translate("KookminKiosk", u"\uad00\ub9ac\uc790 \ub3c4\uad6c", None))

@@ -9,13 +9,10 @@ class KioskUI(QMainWindow):
     def __init__(self) -> None:
         super(KioskUI, self).__init__()
         self.presenter = None
-        self.menugridSize = 5
+        self.menugridSize = 4
     
     def assignPresenter(self, presenter: KioskPresenter):
         self.presenter = presenter
-
-    def initOrderUI(self):
-        ...
 
     def initStartUI(self):
         self.setFixedSize(600, 800)
@@ -72,12 +69,12 @@ class KioskUI(QMainWindow):
         self.orderpage = QWidget()
         
         self.MenuTab = QTabWidget(self.orderpage)
-        self.MenuTab.setGeometry(QRect(0, 0, 580, 520))
+        self.MenuTab.setGeometry(QRect(20, 10, 560, 510))
         self.MenuTab.setStyleSheet(u"background-color:rgb(254, 255, 178)")
         
         self.foodmenutab = QWidget()
         self.foodgridLayoutWidget = QWidget(self.foodmenutab)
-        self.foodgridLayoutWidget.setGeometry(QRect(0, 0, 570, 490))
+        self.foodgridLayoutWidget.setGeometry(QRect(0, 0, 550, 480))
         self.FoodGrid = QGridLayout(self.foodgridLayoutWidget)
 
         # self.testbutton = OrderMenuButton("test1\n\n2,000", self.foodgridLayoutWidget)
@@ -89,14 +86,14 @@ class KioskUI(QMainWindow):
         
         self.drinkmenutab = QWidget()
         self.foodgridLayoutWidget2 = QWidget(self.drinkmenutab)
-        self.foodgridLayoutWidget2.setGeometry(QRect(0, 0, 570, 490))
+        self.foodgridLayoutWidget2.setGeometry(QRect(0, 0, 550, 480))
         self.DrinkGrid = QGridLayout(self.foodgridLayoutWidget2)
 
         self.MenuTab.addTab(self.drinkmenutab, "Drink")
         
         self.setmenutab = QWidget()
         self.foodgridLayoutWidget3 = QWidget(self.setmenutab)
-        self.foodgridLayoutWidget3.setGeometry(QRect(0, 0, 570, 490))
+        self.foodgridLayoutWidget3.setGeometry(QRect(0, 0, 550, 480))
         self.SetGrid = QGridLayout(self.foodgridLayoutWidget3)
 
         self.MenuTab.addTab(self.setmenutab, "Set")
@@ -146,8 +143,23 @@ class KioskUI(QMainWindow):
         self.orderverticalLayout.addWidget(self.CancleOrderButton, 0, Qt.AlignHCenter)
         
         # Cart table =====================================
-        self.tableView = QTableView(self.orderpage)
-        self.tableView.setGeometry(QRect(10, 540, 340, 250))
+        self.cartlabel = QLabel("장바구니", self.orderpage)
+        self.cartlabel.setGeometry(QRect(90, 530, 190, 40))
+        font4 = QFont()
+        font4.setPointSize(17)
+        font4.setBold(True)
+        font4.setWeight(75)
+        self.cartlabel.setFont(font4)
+        self.cartlabel.setAlignment(Qt.AlignCenter)
+        
+        self.cartTable = QTableWidget(self.orderpage)
+        self.cartTable.setGeometry(QRect(10, 580, 340, 210))
+        self.cartTable.setColumnCount(4)
+        self.cartTable.setRowCount(0)
+        self.cartTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.cartTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.cartTable.verticalHeader().setVisible(False)
+        self.cartTable.setHorizontalHeaderLabels(["품명", "가격", "수량", ""])
         # ======================================
         self.stackedWidget.addWidget(self.orderpage)
         
@@ -157,12 +169,14 @@ class KioskUI(QMainWindow):
         # ============================
         self.presenter.loadMenu()
 
+    # 더미 위젯으로 그리드 채움
     def fillDummyWidgetOnGrid(self, grid: QGridLayout):
         for row in range(self.menugridSize):
             for col in range(self.menugridSize):
                 dummy = DummyWidget(self)
                 grid.addWidget(dummy, row, col)
-        
+
+    # 그리드에서 위젯을 없애고 해당 자리에 다른 위젯 삽입    
     def replaceWidget(self, grid:QGridLayout, newwidget:QPushButton, y, x):
         oldwidget = grid.itemAtPosition(x, y).widget()
         grid.removeWidget(oldwidget)

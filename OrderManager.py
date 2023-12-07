@@ -12,7 +12,7 @@ class OrderManager(SingletonInstance):
     def __init__(self) -> None:
         self.OrderDAO = OrderDAO.instance()
         self.MenuDAO = MenuDAO.instance()
-        # self.cartDict = {}
+        self.cartDict = {}
         # self.numticketnum = 1
         # self.currentOrder = None
         # self.nextorderid = self.DBManager.getNextOrderID()
@@ -35,11 +35,11 @@ class OrderManager(SingletonInstance):
     #     self.ClearCart()
         
   
-    # def AddToCart(self, menu, quantity):
-    #     if menu in self.cartDict.keys():  #기존에 메뉴가 이미 추가되어있으면 수량 추가
-    #         self.cartDict[menu] = self.cartDict[menu]+quantity
-    #     else :
-    #         self.cartDict[menu] = quantity
+    def addToCart(self, menu, quantity):
+        if menu in self.cartDict.keys():  #기존에 메뉴가 이미 추가되어있으면 수량 추가
+            self.cartDict[menu] = self.cartDict[menu]+quantity
+        else :
+            self.cartDict[menu] = quantity
 
     # def DisplayCart(self):
     #     if len(self.cartDict.items()) == 0:
@@ -48,10 +48,11 @@ class OrderManager(SingletonInstance):
     #     for index, (key, value) in enumerate(self.cartDict.items(), start=1):
     #         print(f"            -  {index}. {key.name}({value})")
 
-    # def RemoveFromCart(self, idx):
-    #     cartitems = list(self.cartDict.items())
-    #     del cartitems[idx]
-    #     self.cartDict = dict(cartitems)
+    def removeFromCart(self, menu):
+        if self.cartDict[menu] == 1:
+            del self.cartDict[menu]
+        else:
+            self.cartDict[menu] -= 1
         
     # def ClearCart(self):
     #     self.cartDict.clear()

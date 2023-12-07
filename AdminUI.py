@@ -2,6 +2,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 from AdminPresenter import AdminPresenter
+
 class AdminUI(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -31,3 +32,5 @@ class AdminUI(QMainWindow):
         kioskTitleFont.setWeight(75)
         self.label.setFont(kioskTitleFont)
         self.label.setAlignment(Qt.AlignCenter)
+        
+        self.windowModality = Qt.ApplicationModal
