@@ -12,51 +12,54 @@ class OrderManager(SingletonInstance):
     def __init__(self) -> None:
         self.OrderDAO = OrderDAO.instance()
         self.MenuDAO = MenuDAO.instance()
-        self.cartDict = {}
-        # self.numticketnum = 1
-        # self.currentOrder = None
-        # self.nextorderid = self.DBManager.getNextOrderID()
-
-    # def MakeOrder(self):
-    #     orderdate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    #     totalprice = self.CalculateTotalPrice()
-    #     orderid = self.nextorderid
-    #     orderitems = copy.deepcopy(self.cartDict) # 깊은복사 해주어야 clearcart해도 내용이 사라지지 않음
-    #     self.nextorderid+=1
-    #     while True :
-    #         istakeout = input("포장유무(O/X) : ").upper()
-    #         if istakeout == 'O' or istakeout == 'X':
-    #             break
-    #         else:
-    #             print("wrong input! again please")
-    #     neworder = Order(orderid, orderdate, orderitems, totalprice, istakeout)
-    #     self.currentOrder = neworder
-    #     self.DBManager.UpdateOrderHistory(neworder)
-    #     self.ClearCart()
-        
+        self.cartDict = {}       
   
     def addToCart(self, menu, quantity):
-        if menu in self.cartDict.keys():  #기존에 메뉴가 이미 추가되어있으면 수량 추가
-            self.cartDict[menu] = self.cartDict[menu]+quantity
+        if menu.name in self.cartDict.keys():  #기존에 메뉴가 이미 추가되어있으면 수량 추가
+            self.cartDict[menu.name]['quantity'] += quantity
         else :
-            self.cartDict[menu] = quantity
+            self.cartDict[menu.name] = {}
+            self.cartDict[menu.name]['menu'] = menu
+            self.cartDict[menu.name]['quantity'] = quantity
+            
+    def increaseCartItem(self, menuname):
+        self.cartDict[menuname]['quantity'] += 1
 
-    # def DisplayCart(self):
-    #     if len(self.cartDict.items()) == 0:
-    #         print("                  Empty")
-    #         return
-    #     for index, (key, value) in enumerate(self.cartDict.items(), start=1):
-    #         print(f"            -  {index}. {key.name}({value})")
-
-    def removeFromCart(self, menu):
-        if self.cartDict[menu] == 1:
-            del self.cartDict[menu]
+    def decreaseCartItem(self, menuname):
+        if self.cartDict[menuname]['quantity'] == 1:
+            del self.cartDict[menuname]
         else:
-            self.cartDict[menu] -= 1
+            self.cartDict[menuname]['quantity'] -= 1
         
-    # def ClearCart(self):
-    #     self.cartDict.clear()
+    def clearCart(self):
+        self.cartDict.clear()
         
+    def calculateTotalPrice(self):
+        tprice = 0
+        for data in self.cartDict.values():
+            tprice += data['menu'].price * data['quantity']
+        return tprice
+    
+    def calculateTotalQuantity(self):
+        quantity = 0
+        for data in self.cartDict.values():
+            quantity += data['quantity']
+            
+        return quantity
+    
+    def processOrder(self):
+        price = self.calculateTotalPrice()
+        quantity = self.calculateTotalQuantity()
+        
+        orderid = self.OrderDAO.insertOrderData((price, quantity))
+        self.OrderDAO.insertOrderDetailData(orderid, self.cartDict)
+        
+    def getCart(self):
+        return self.cartDict
+    
+    def getTodayOrderCount(self):
+        return self.OrderDAO.getTodayOrderCount()
+    
     # def ProcessPayment(self):
     #     time.sleep(1)
     #     print("...Waiting for a payment...")
@@ -84,8 +87,3 @@ class OrderManager(SingletonInstance):
     # def ResetNumberTicketNum(self):
     #     self.numticketnum = 0
 
-    # def CalculateTotalPrice(self):
-    #     tprice = 0
-    #     for i in self.cartDict:
-    #         tprice += i.price * self.cartDict[i]
-    #     return tprice

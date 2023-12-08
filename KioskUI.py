@@ -108,13 +108,13 @@ class KioskUI(QMainWindow):
         self.orderverticalLayoutWidget.setGeometry(QRect(360, 540, 220, 250))
         self.orderverticalLayout = QVBoxLayout(self.orderverticalLayoutWidget)
 
-        self.TotalPriceLabel = QLabel("총 가격: ", self.orderverticalLayoutWidget)
-        self.TotalPriceLabel.setMaximumSize(QSize(16777215, 50))
+        self.totalPriceLabel = QLabel("총 가격: 0 ₩", self.orderverticalLayoutWidget)
+        self.totalPriceLabel.setMaximumSize(QSize(16777215, 50))
         totalpricefont = QFont()
         totalpricefont.setPointSize(14)
-        self.TotalPriceLabel.setFont(totalpricefont)
+        self.totalPriceLabel.setFont(totalpricefont)
 
-        self.orderverticalLayout.addWidget(self.TotalPriceLabel)
+        self.orderverticalLayout.addWidget(self.totalPriceLabel)
         
         # Order Buttons ===========================================
         orderbuttonfont = QFont()
@@ -126,11 +126,12 @@ class KioskUI(QMainWindow):
         self.PurchaseButton.setMinimumSize(QSize(150, 0))
         self.PurchaseButton.setMaximumSize(QSize(162, 16777215))
         self.PurchaseButton.setFont(orderbuttonfont)
+        self.PurchaseButton.clicked.connect(self.presenter.processOrder)
         
-        self.ResetShoppingcartButton = QPushButton("장바구니 초기화", self.orderverticalLayoutWidget)
-        self.ResetShoppingcartButton.setMinimumSize(QSize(150, 0))
-        self.ResetShoppingcartButton.setMaximumSize(QSize(162, 16777215))
-        self.ResetShoppingcartButton.setFont(orderbuttonfont)
+        self.clearCartButton = QPushButton("장바구니 초기화", self.orderverticalLayoutWidget)
+        self.clearCartButton.setMinimumSize(QSize(150, 0))
+        self.clearCartButton.setMaximumSize(QSize(162, 16777215))
+        self.clearCartButton.setFont(orderbuttonfont)
         
         self.CancleOrderButton = QPushButton("주문 취소", self.orderverticalLayoutWidget)
         self.CancleOrderButton.setMinimumSize(QSize(150, 0))
@@ -139,7 +140,7 @@ class KioskUI(QMainWindow):
         self.CancleOrderButton.clicked.connect(self.changeUI)
         
         self.orderverticalLayout.addWidget(self.PurchaseButton, 0, Qt.AlignHCenter)
-        self.orderverticalLayout.addWidget(self.ResetShoppingcartButton, 0, Qt.AlignHCenter)
+        self.orderverticalLayout.addWidget(self.clearCartButton, 0, Qt.AlignHCenter)
         self.orderverticalLayout.addWidget(self.CancleOrderButton, 0, Qt.AlignHCenter)
         
         # Cart table =====================================
@@ -154,12 +155,19 @@ class KioskUI(QMainWindow):
         
         self.cartTable = QTableWidget(self.orderpage)
         self.cartTable.setGeometry(QRect(10, 580, 340, 210))
-        self.cartTable.setColumnCount(4)
+        self.cartTable.setColumnCount(5)
         self.cartTable.setRowCount(0)
         self.cartTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.cartTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.cartTable.setColumnWidth(0, 98)
+        self.cartTable.setColumnWidth(1, 90)
+        self.cartTable.setColumnWidth(2, 60)
+        self.cartTable.setColumnWidth(3, 45)
+        self.cartTable.setColumnWidth(4, 45)
+        self.cartTable.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.cartTable.verticalHeader().setVisible(False)
-        self.cartTable.setHorizontalHeaderLabels(["품명", "가격", "수량", ""])
+        self.cartTable.setHorizontalHeaderLabels(["품명", "가격", "수량", "-", "+"])
+        
+        self.clearCartButton.clicked.connect(lambda: self.presenter.clearCart(self.cartTable))
         # ======================================
         self.stackedWidget.addWidget(self.orderpage)
         
@@ -187,6 +195,8 @@ class KioskUI(QMainWindow):
         if self.stackedWidget.currentIndex() == 0:
             self.stackedWidget.setCurrentIndex(1)
         else:
+            self.presenter.clearCart(self.cartTable)
+            self.MenuTab.setCurrentIndex(0)
             self.stackedWidget.setCurrentIndex(0)
             
 class DummyWidget(QWidget):
