@@ -1,2 +1,4 @@
 *.pyc
 password.py
+*.ui
+ui_*.py
