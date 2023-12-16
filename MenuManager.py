@@ -10,7 +10,13 @@ class MenuManager(SingletonInstance):
         self.MenuDAO = MenuDAO.instance()
         # self.menuListDB = self.DBManager.getMenuDB()  # menu db 가져오기
         self.menuList = []
+        self.menutypeList = []
         self.loadMenu()
+        self.loadMenutype()
+    
+    def refresh(self):
+        self.loadMenu()
+        self.loadMenutype()
     
     # menuDAO로부터 메뉴를 읽어와 menu list 생성
     def loadMenu(self):
@@ -21,6 +27,32 @@ class MenuManager(SingletonInstance):
             menu = Menu(menuid, name, price, stringToMenutype(menutype))
             self.menuList.append(menu)
 
+    def editMenu(self, id, name, price, menutype):
+        self.MenuDAO.editMenu(id, name, price, menutype)
+        self.refresh()
+        
+    def deleteMenu(self, id):
+        self.MenuDAO.deleteMenu(id)
+        self.refresh()
+    
+    def createMenu(self, name, price, menutype):
+        self.MenuDAO.createMenu(name, price, menutype)
+        self.refresh()
+        
+    def loadMenutype(self):
+        self.menutypeList.clear()
+        self.menutypeList = list(Menutype)
+        
+        
+    
     def getMenuList(self) -> list[Menu]:
         return self.menuList
     
+    def getMenutypeList(self) -> list[Menutype]:
+        return self.menutypeList
+
+if __name__ == "__main__":
+    l = list(Menutype)
+    for i in l:
+        print(i)
+    print(li for li in l)

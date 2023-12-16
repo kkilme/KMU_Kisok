@@ -8,13 +8,10 @@ class CustomWidgetCreator(SingletonInstance):
     def menuButton(self, text, menu):
         return MenuButton(text, menu)
     
-    def enterNumWindow(self, menu, presenter):
-        window = EnterNumWindow()
-        def sendsignal():
-            presenter.addToCart(menu, window.num.text())
-            window.close()
-        window.okbutton.clicked.connect(lambda: sendsignal())
-        window.exec_()
+    def menuQuantityWindow(self):
+        window = MenuQuantityWindow()
+        return window
+        
         
     def tableWidgetItem(self, text):
         widget = QTableWidgetItem(text)
@@ -29,9 +26,13 @@ class CustomWidgetCreator(SingletonInstance):
             return CartItemManageButton("-")
         elif managetype == "increase":
             return CartItemManageButton("+")
+        elif managetype == "remove":
+            return CartItemManageButton("x")
+        elif managetype == "edit":
+            return CartItemManageButton("수정")
         
-    def numTicketDialog(self, num, tprice, cart):
-        window = NumTicketDialog()
+    def numTicket(self, num, tprice, cart):
+        window = NumTicket()
         table = window.orderitemTable
         window.numticket.setText(str(num))
         window.totalprice.setText(f'합계: {tprice} ₩')
@@ -45,3 +46,10 @@ class CustomWidgetCreator(SingletonInstance):
             
         return window
     
+    def menuEditor(self, name, price, type, menutypes):
+        window = MenuEditor(name, price, type, menutypes)
+        return window
+        
+    def menuCreator(self, menutypes):
+        window = MenuCreator(menutypes)
+        return window

@@ -1,6 +1,5 @@
 from MenuManager import MenuManager
 from OrderManager import OrderManager
-from AdminUI import AdminUI
 from AdminPresenter import AdminPresenter
 from CustomWidgetCreator import CustomWidgetCreator
 from functools import partial
@@ -12,21 +11,18 @@ class KioskPresenter():
         self.OrderManager = OrderManager.instance()
         self.WidgetCreator = CustomWidgetCreator.instance()
         
-        self.adminUI = AdminUI()
-        adminPresenter = AdminPresenter(self.adminUI)
-        self.adminUI.assignPresenter(adminPresenter)
-        self.adminUI.initStartUI()
-        
+        self.adminPresenter = AdminPresenter(self)
         self.nextnumticketnum = int(self.OrderManager.getTodayOrderCount()) + 1
 
     # 관리자 도구 창 염
     def openAdminWindow(self):
-        if not self.adminUI.isVisible():
-            self.adminUI.show()
+        self.adminPresenter.openUI()
     
     # 메뉴를 불러와 UI에 표시    
     def loadMenu(self):
         menulist = self.MenuManager.getMenuList()
+        self.ui.clearGridLayout()
+        self.ui.fillDummyWidgetOnGrid()
         food_x = 0; food_y = 0
         drink_x = 0; drink_y = 0
         set_x = 0; set_y = 0
@@ -39,24 +35,33 @@ class KioskPresenter():
         # 알맞은 탭에 메뉴 삽입
         for menu in menulist:
             button = self.WidgetCreator.menuButton(f'{menu.name}\n\n₩{menu.price}', menu)
-            button.clicked.connect(partial(self.WidgetCreator.enterNumWindow, menu, self))
+            button.clicked.connect(partial(self.enterMenuQuantity, menu))
             
-            if str(getattr(menu, "menutype")) == "Menutype.Food":
+            if str(menu.menutype) == "Menutype.Food":
                 self.ui.replaceWidget(self.ui.FoodGrid, button, food_y, food_x)
                 food_x, food_y = increase_xy(food_x, food_y)
-            elif str(getattr(menu, "menutype")) == "Menutype.Drink":
+            elif str(menu.menutype) == "Menutype.Drink":
                 self.ui.replaceWidget(self.ui.DrinkGrid, button, drink_y, drink_x)
                 drink_x, drink_y = increase_xy(drink_x, drink_y)
-            elif str(getattr(menu, "menutype")) == "Menutype.Set":
+            elif str(menu.menutype) == "Menutype.Set":
                 self.ui.replaceWidget(self.ui.SetGrid, button, set_y, set_x)
                 set_x, set_y = increase_xy(set_x, set_y)
+    
+    def enterMenuQuantity(self, menu):
+        window = self.WidgetCreator.menuQuantityWindow()
+        def sendsignal():
+            self.addToCart(menu, window.num.text())
+            window.close()
+        window.okbutton.clicked.connect(lambda: sendsignal())
+        window.exec_()
+        
     
     # 장바구니에 메뉴 추가
     def addToCart(self, menu, quantity):
         table = self.ui.cartTable
         if quantity == '': quantity = 1
         else: quantity = int(quantity)
-        row_cur = self.findRowbyString(table, menu.name)
+        row_cur = self.ui.findRowinCart(menu.name)
         # 이미 장바구니에 해당 메뉴 있는경우 중첩
         if row_cur != -1:
             current_quantity = int(table.item(row_cur, 2).text())
@@ -120,14 +125,6 @@ class KioskPresenter():
         self.OrderManager.increaseCartItem(menuname)
         self.updateTotalPrice()
         
-    # 테이블에서 특정 스트링이 들어간 행의 번호를 찾음. 없으면 -1 리턴
-    # 메뉴 이름으로 찾기때문에 column은 0번 고정
-    def findRowbyString(self, table, string):
-        for row in range(table.rowCount()):
-            item = table.item(row, 0)
-            if item and string == item.text():
-                return row
-        return -1
     
     # 장바구니 초기화
     def clearCart(self, table):
@@ -148,7 +145,8 @@ class KioskPresenter():
         num = self.nextnumticketnum
         tprice = self.OrderManager.calculateTotalPrice()
         cart = self.OrderManager.getCart()
-        window = self.WidgetCreator.numTicketDialog(num, tprice, cart)
+        self.adminPresenter.addOrderQueueItem(cart, num, tprice)
+        window = self.WidgetCreator.numTicket(num, tprice, cart)
         self.nextnumticketnum += 1
         window.exec_()
         self.ui.changeUI()

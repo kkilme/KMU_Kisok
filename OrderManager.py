@@ -1,11 +1,6 @@
-import time
-import copy
 from OrderDAO import OrderDAO
 from MenuDAO import MenuDAO
-from datetime import datetime
-from Order import Order
 from Singleton import SingletonInstance
-
 
 class OrderManager(SingletonInstance):
 
@@ -59,31 +54,3 @@ class OrderManager(SingletonInstance):
     
     def getTodayOrderCount(self):
         return self.OrderDAO.getTodayOrderCount()
-    
-    # def ProcessPayment(self):
-    #     time.sleep(1)
-    #     print("...Waiting for a payment...")
-    #     time.sleep(1.5)
-    #     print("Payment Success!")
-    #     time.sleep(1)
-        
-
-    # def MakeReceipt(self):
-    #     order = self.currentOrder
-    #     print("주문날짜:", order.orderDate)
-    #     print("주문내역:")
-    #     for i in order.orderItems:
-    #         print(f" - {i.name} {i.price}원 x{order.orderItems[i]}")
-    #     print("포장유무: ", order.isTakeOut)
-    #     print("\n합계금액: ", order.totalPrice)
-    #     print("*****************************")
-
-    # def MakeNumberTicket(self):
-    #     print(f'\t     {self.numticketnum}\n')
-    #     print("주문날짜:", self.currentOrder.orderDate)
-    #     print("*****************************")
-    #     self.numticketnum+=1
-
-    # def ResetNumberTicketNum(self):
-    #     self.numticketnum = 0
-

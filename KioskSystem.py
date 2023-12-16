@@ -9,13 +9,12 @@ class KioskSystem():
         self.KioskUI = KioskUI()
         self.KioskPresenter = KioskPresenter(self.KioskUI)
         self.KioskUI.assignPresenter(self.KioskPresenter)
-        self.KioskUI.initStartUI()
+        self.KioskUI.initUI()
 
     def StartKioskSystem(self):
         self.KioskUI.show()
         sys.exit(self.app.exec_())
 
-# ₩
 if __name__ == '__main__':
     kiosk = KioskSystem()
     kiosk.StartKioskSystem()

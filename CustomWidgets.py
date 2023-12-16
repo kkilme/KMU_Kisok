@@ -20,9 +20,9 @@ class MenuButton(QPushButton):
         
         self.setStyleSheet(u"background-color:white")
         
-class EnterNumWindow(QDialog):
+class MenuQuantityWindow(QDialog):
     def __init__(self, parent: QWidget=None) -> None:
-        super(EnterNumWindow, self).__init__(parent=parent)
+        super(MenuQuantityWindow, self).__init__(parent=parent)
         self.initUI()
     
     def initUI(self):
@@ -74,16 +74,14 @@ class CartItemManageButton(QPushButton):
         self.setStyleSheet(u"background-color:yellow")
 
 
-class NumTicketDialog(QDialog):
+class NumTicket(QDialog):
     def __init__(self,):
-        super(NumTicketDialog, self).__init__()
+        super(NumTicket, self).__init__()
         self.initUI()
     
     def initUI(self):
         self.resize(480, 580)
         self.setWindowTitle("Order Complete")
-        
-        
         
         self.title = QLabel("주문이 완료되었습니다.", self)
         self.title.setGeometry(QRect(0, 30, 479, 45))
@@ -126,9 +124,141 @@ class NumTicketDialog(QDialog):
         self.totalprice.setFont(font3)
         self.totalprice.setAlignment(Qt.AlignCenter)
         
+class MenuEditor(QDialog):
+    def __init__(self, menuname, menuprice, menutype, allmenutype):
+        super(MenuEditor, self).__init__()
+        self.initUI()
+        self.menunameline.setText(menuname)
+        self.menupriceline.setText(menuprice)
+        for t in allmenutype:
+            self.menutypecombobox.addItem(str(t)[9:])
+        self.menutypecombobox.setCurrentText(menutype)
+        
+    def initUI(self):
+        self.resize(700, 200)
+        self.setWindowTitle("Menu Editor")
+        font = QFont()
+        font.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
+        font.setPointSize(9)
+        self.setFont(font)
+        
+        self.label = QLabel("수정 사항을 입력하세요", self)
+        self.label.setGeometry(QRect(200, 20, 291, 21))
+        
+        font1 = QFont()
+        font1.setPointSize(12)
+        font1.setBold(True)
+        font1.setWeight(75)
+        self.label.setFont(font1)
+        self.label.setAlignment(Qt.AlignCenter)
+        
+        self.menunameline = QLineEdit(self)
+        self.menunameline.setGeometry(QRect(100, 100, 113, 21))
+        
+        self.menunamelabel = QLabel("메뉴명", self)
+        self.menunamelabel.setGeometry(QRect(100, 70, 111, 21))
+        font2 = QFont()
+        font2.setPointSize(9)
+        self.menunamelabel.setFont(font2)
+        self.menunamelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
+        self.menupriceline = QLineEdit(self)
+        self.menupriceline.setGeometry(QRect(290, 100, 113, 21))
+        validator = QIntValidator(self)
+        self.menupriceline.setValidator(validator)
+        
+        self.menupricelabel = QLabel("메뉴 가격", self)
+        self.menupricelabel.setGeometry(QRect(290, 70, 111, 21))
+        self.menupricelabel.setFont(font2)
+        self.menupricelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
+        self.menutypelabel = QLabel("메뉴 타입", self)
+        self.menutypelabel.setGeometry(QRect(480, 70, 111, 21))
+        self.menutypelabel.setFont(font2)
+        self.menutypelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.menutypecombobox = QComboBox(self)
+        self.menutypecombobox.setGeometry(QRect(480, 100, 111, 21))
+        
+        self.okButton = QPushButton("확인", self)
+        self.okButton.setGeometry(QRect(210, 150, 93, 28))
+        self.okButton.setFont(font2)
+        
+        self.cancelButton = QPushButton("취소", self)
+        self.cancelButton.setGeometry(QRect(400, 150, 93, 28))
+        self.cancelButton.setFont(font2)
+        self.cancelButton.clicked.connect(self.close)
+
+class MenuCreator(QDialog):
+    def __init__(self, allmenutype):
+        super(MenuCreator, self).__init__()
+        self.initUI()
+        for t in allmenutype:
+            self.menutypecombobox.addItem(str(t)[9:])   
+        self.menutypecombobox.setCurrentIndex(0)
+        
+    def initUI(self):
+        self.resize(700, 200)
+        self.setWindowTitle("Menu Editor")
+        font = QFont()
+        font.setFamily(u"\ub098\ub214\ubc14\ub978\uace0\ub515")
+        font.setPointSize(9)
+        self.setFont(font)
+        
+        self.label = QLabel("메뉴의 정보를 입력하세요", self)
+        self.label.setGeometry(QRect(200, 20, 291, 21))
+        
+        font1 = QFont()
+        font1.setPointSize(12)
+        font1.setBold(True)
+        font1.setWeight(75)
+        self.label.setFont(font1)
+        self.label.setAlignment(Qt.AlignCenter)
+        
+        self.menunameline = QLineEdit(self)
+        self.menunameline.setGeometry(QRect(100, 100, 113, 21))
+        
+        self.menunamelabel = QLabel("메뉴명", self)
+        self.menunamelabel.setGeometry(QRect(100, 70, 111, 21))
+        font2 = QFont()
+        font2.setPointSize(9)
+        self.menunamelabel.setFont(font2)
+        self.menunamelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
+        self.menupriceline = QLineEdit(self)
+        self.menupriceline.setGeometry(QRect(290, 100, 113, 21))
+        validator = QIntValidator(self)
+        self.menupriceline.setValidator(validator)
+        
+        self.menupricelabel = QLabel("메뉴 가격", self)
+        self.menupricelabel.setGeometry(QRect(290, 70, 111, 21))
+        self.menupricelabel.setFont(font2)
+        self.menupricelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
+        self.menutypelabel = QLabel("메뉴 타입", self)
+        self.menutypelabel.setGeometry(QRect(480, 70, 111, 21))
+        self.menutypelabel.setFont(font2)
+        self.menutypelabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.menutypecombobox = QComboBox(self)
+        self.menutypecombobox.setGeometry(QRect(480, 100, 111, 21))
+        
+        self.okButton = QPushButton("확인", self)
+        self.okButton.setGeometry(QRect(210, 150, 93, 28))
+        self.okButton.setFont(font2)
+        
+        self.cancelButton = QPushButton("취소", self)
+        self.cancelButton.setGeometry(QRect(400, 150, 93, 28))
+        self.cancelButton.setFont(font2)
+        self.cancelButton.clicked.connect(self.close)
+        
+        self.errormessage = QLabel("", self)
+        self.errormessage.setGeometry(QRect(213, 124, 281, 21))
+        self.errormessage.setFont(font2)
+        self.errormessage.setStyleSheet(u"color:red")
+        self.errormessage.setAlignment(Qt.AlignCenter)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mywindow = NumTicketDialog()
+    mywindow = NumTicket()
     mywindow.show()
     app.exec_()

@@ -14,7 +14,7 @@ class KioskUI(QMainWindow):
     def assignPresenter(self, presenter: KioskPresenter):
         self.presenter = presenter
 
-    def initStartUI(self):
+    def initUI(self):
         self.setFixedSize(600, 800)
         self.setWindowTitle("Kookmin Kiosk")
         mainfont = QFont()
@@ -98,10 +98,6 @@ class KioskUI(QMainWindow):
 
         self.MenuTab.addTab(self.setmenutab, "Set")
         
-        self.fillDummyWidgetOnGrid(self.FoodGrid)
-        self.fillDummyWidgetOnGrid(self.DrinkGrid)
-        self.fillDummyWidgetOnGrid(self.SetGrid)
-        
         # Total Price ============================================
         
         self.orderverticalLayoutWidget = QWidget(self.orderpage)
@@ -165,7 +161,7 @@ class KioskUI(QMainWindow):
         self.cartTable.setColumnWidth(4, 45)
         self.cartTable.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.cartTable.verticalHeader().setVisible(False)
-        self.cartTable.setHorizontalHeaderLabels(["품명", "가격", "수량", "-", "+"])
+        self.cartTable.setHorizontalHeaderLabels(["메뉴명", "가격", "수량", "-", "+"])
         
         self.clearCartButton.clicked.connect(lambda: self.presenter.clearCart(self.cartTable))
         # ======================================
@@ -176,13 +172,18 @@ class KioskUI(QMainWindow):
         
         # ============================
         self.presenter.loadMenu()
+        self.move(400, 200)
 
     # 더미 위젯으로 그리드 채움
-    def fillDummyWidgetOnGrid(self, grid: QGridLayout):
-        for row in range(self.menugridSize):
-            for col in range(self.menugridSize):
-                dummy = DummyWidget(self)
-                grid.addWidget(dummy, row, col)
+    def fillDummyWidgetOnGrid(self):
+        def fill(grid):
+            for row in range(self.menugridSize):
+                for col in range(self.menugridSize):
+                    dummy = DummyWidget(self)
+                    grid.addWidget(dummy, row, col)
+        fill(self.FoodGrid)
+        fill(self.DrinkGrid)
+        fill(self.SetGrid)
 
     # 그리드에서 위젯을 없애고 해당 자리에 다른 위젯 삽입    
     def replaceWidget(self, grid:QGridLayout, newwidget:QPushButton, y, x):
@@ -198,6 +199,27 @@ class KioskUI(QMainWindow):
             self.presenter.clearCart(self.cartTable)
             self.MenuTab.setCurrentIndex(0)
             self.stackedWidget.setCurrentIndex(0)
+
+    # 테이블에서 특정 스트링이 들어간 행의 번호를 찾음. 없으면 -1 리턴
+    # 메뉴 이름으로 찾기때문에 column은 0번 고정
+    def findRowinCart(self, string):
+        table = self.cartTable
+        for row in range(table.rowCount()):
+            item = table.item(row, 0)
+            if item and string == item.text():
+                return row
+        return -1
+    
+    # gridlayout의 모든 위젯을 제거
+    def clearGridLayout(self):
+        def clear(grid):
+            for i in reversed(range(grid.count())):
+                item = grid.takeAt(i)
+                if item.widget():
+                    item.widget().deleteLater()  # 위젯 삭제
+        clear(self.FoodGrid)
+        clear(self.DrinkGrid)
+        clear(self.SetGrid)
             
 class DummyWidget(QWidget):
     pass
