@@ -47,3 +47,38 @@ class OrderDAO(DAOTemplate):
 
         self.disconnectDB()
         return cnt[0][0]
+    
+    def getOrderHistory(self):
+        self.connectDB()
+        
+        sql = "SELECT * FROM kookminkiosk.order"
+        self.cursor.execute(sql)
+        
+        res = self.cursor.fetchall()
+        self.disconnectDB()
+        return res
+    
+    def getTotalSalesPerMenu(self):
+        self.connectDB()
+        
+        sql = """
+            SELECT
+                menu.id AS menu_id,
+                menu.name AS menu_name,
+                SUM(orderdetail.quantity * menu.price) AS total_sales
+            FROM
+                kookminkiosk.orderdetail
+            JOIN
+                kookminkiosk.menu ON orderdetail.menuid = menu.id
+            GROUP BY
+                menu.id, menu.price;
+            """
+        self.cursor.execute(sql)
+        
+        res = self.cursor.fetchall()
+        self.disconnectDB()
+        return res
+    
+if __name__ == "__main__":
+    db = OrderDAO()
+    print(db.getOrderDetailHistory())

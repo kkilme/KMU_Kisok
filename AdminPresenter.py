@@ -4,6 +4,7 @@ from AdminManager import AdminManager
 from CustomWidgetCreator import CustomWidgetCreator
 from AdminUI import AdminUI
 from functools import partial
+from GraphDrawer import GraphDrawer
 
 class AdminPresenter():
     def __init__(self, kioskpresenter) -> None:
@@ -11,6 +12,7 @@ class AdminPresenter():
         self.ui = AdminUI()
         self.ui.assignPresenter(self)
         self.ui.initUI()
+        self.graphDrawer = GraphDrawer()
         self.MenuManager = MenuManager.instance()
         self.StatisticsManager = StatisticsManager.instance()
         self.AdminManager = AdminManager.instance()
@@ -130,4 +132,12 @@ class AdminPresenter():
             print("Could not find row")
             return -1
         return row
+    
+    def drawDailyIncome(self):
+        data = self.StatisticsManager.calcDailyIncome()
+        self.graphDrawer.drawDailyIncome(data)
+        
+    def drawSalesPerMenu(self):
+        data = self.StatisticsManager.calcTotalSalesPerMenu()
+        self.graphDrawer.drawSalesPerMenu(data)
     

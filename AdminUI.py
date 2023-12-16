@@ -106,8 +106,10 @@ class AdminUI(QMainWindow):
         
         self.dailyincomebutton = QPushButton("일별 매출 확인", self.page_3)
         self.dailyincomebutton.setGeometry(QRect(170, 120, 131, 91))
-        self.incomepermenubutton = QPushButton("메뉴별 매출 확인", self.page_3)
-        self.incomepermenubutton.setGeometry(QRect(410, 120, 131, 91))
+        self.dailyincomebutton.clicked.connect(self.presenter.drawDailyIncome)
+        self.salespermenubutton = QPushButton("메뉴별 매출 확인", self.page_3)
+        self.salespermenubutton.setGeometry(QRect(410, 120, 131, 91))
+        self.salespermenubutton.clicked.connect(self.presenter.drawSalesPerMenu)
         self.backbutton = QPushButton("돌아가기", self.page_3)
         self.backbutton.setGeometry(QRect(310, 240, 93, 28))
         self.backbutton.clicked.connect(lambda: self.changeUI(1))
