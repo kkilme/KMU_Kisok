@@ -2,18 +2,14 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 import sys
-from KioskPresenter import KioskPresenter
+from UserPresenter import UserPresenter
+from UITemplate import UITemplate
 
-
-class KioskUI(QMainWindow):
+class UserUI(UITemplate):
     def __init__(self) -> None:
-        super(KioskUI, self).__init__()
-        self.presenter = None
+        super(UserUI, self).__init__()
         self.menugridSize = 4
     
-    def assignPresenter(self, presenter: KioskPresenter):
-        self.presenter = presenter
-
     def initUI(self):
         self.setFixedSize(600, 800)
         self.setWindowTitle("Kookmin Kiosk")
@@ -163,7 +159,7 @@ class KioskUI(QMainWindow):
         self.cartTable.verticalHeader().setVisible(False)
         self.cartTable.setHorizontalHeaderLabels(["메뉴명", "가격", "수량", "-", "+"])
         
-        self.clearCartButton.clicked.connect(lambda: self.presenter.clearCart(self.cartTable))
+        self.clearCartButton.clicked.connect(lambda: self.presenter.clearCart())
         # ======================================
         self.stackedWidget.addWidget(self.orderpage)
         
@@ -196,7 +192,7 @@ class KioskUI(QMainWindow):
         if self.stackedWidget.currentIndex() == 0:
             self.stackedWidget.setCurrentIndex(1)
         else:
-            self.presenter.clearCart(self.cartTable)
+            self.presenter.clearCart()
             self.MenuTab.setCurrentIndex(0)
             self.stackedWidget.setCurrentIndex(0)
 
@@ -226,6 +222,6 @@ class DummyWidget(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mywindow = KioskUI()
+    mywindow = UserUI()
     mywindow.show()
     app.exec_()

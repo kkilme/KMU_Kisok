@@ -5,8 +5,9 @@ from CustomWidgetCreator import CustomWidgetCreator
 from AdminUI import AdminUI
 from functools import partial
 from GraphDrawer import GraphDrawer
+from PresenterTemplate import PresenterTemplate
 
-class AdminPresenter():
+class AdminPresenter(PresenterTemplate):
     def __init__(self, kioskpresenter) -> None:
         self.kioskpresenter = kioskpresenter
         self.ui = AdminUI()
@@ -53,12 +54,13 @@ class AdminPresenter():
         table.setItem(current_row_count, 2, self.WidgetCreator.tableWidgetItem(str(tprice)))
         removeButton = self.WidgetCreator.cartItemManageButton(managetype="remove")
         table.resizeRowToContents(current_row_count)
-        removeButton.clicked.connect(lambda: self.removeOrderQueueItem(table, removeButton))
+        removeButton.clicked.connect(lambda: self.removeOrderQueueItem(removeButton))
         table.setCellWidget(current_row_count, 3, removeButton)
     
     # 주문 대기목록에서 주문 삭제
-    def removeOrderQueueItem(self, table, button):
-        row = self.getWidgetRow(table, 3, button)
+    def removeOrderQueueItem(self, signal_sender):
+        table = self.ui.orderqueuetable
+        row = self.getWidgetRow(table, 3, signal_sender)
         table.removeRow(row)
     
     # 메뉴 관리 창에 현재 메뉴 목록 표시

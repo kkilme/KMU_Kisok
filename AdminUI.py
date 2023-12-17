@@ -1,14 +1,11 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
+from UITemplate import UITemplate
 
-class AdminUI(QMainWindow):
+class AdminUI(UITemplate):
     def __init__(self) -> None:
         super().__init__()
-        self.presenter = None
-
-    def assignPresenter(self, presenter):
-        self.presenter = presenter
 
     def initUI(self):
         self.setFixedSize(700, 300)
@@ -149,5 +146,6 @@ class AdminUI(QMainWindow):
         
         self.stackedWidget.addWidget(self.page_4)
         self.move(1200, 400)
+        
     def changeUI(self, idx):
         self.stackedWidget.setCurrentIndex(idx)

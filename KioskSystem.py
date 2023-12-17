@@ -1,18 +1,18 @@
 from PySide2.QtWidgets import QApplication
 import sys
-from KioskUI import KioskUI
-from KioskPresenter import KioskPresenter
+from UserUI import UserUI
+from UserPresenter import UserPresenter
 
 class KioskSystem():
     def __init__(self) -> None:
         self.app = QApplication(sys.argv)
-        self.KioskUI = KioskUI()
-        self.KioskPresenter = KioskPresenter(self.KioskUI)
-        self.KioskUI.assignPresenter(self.KioskPresenter)
-        self.KioskUI.initUI()
+        self.UserUI = UserUI()
+        self.UserPresenter = UserPresenter(self.UserUI)
+        self.UserUI.assignPresenter(self.UserPresenter)
+        self.UserUI.initUI()
 
     def StartKioskSystem(self):
-        self.KioskUI.show()
+        self.UserUI.show()
         sys.exit(self.app.exec_())
 
 if __name__ == '__main__':

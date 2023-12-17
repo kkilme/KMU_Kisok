@@ -2,9 +2,10 @@ from MenuManager import MenuManager
 from OrderManager import OrderManager
 from AdminPresenter import AdminPresenter
 from CustomWidgetCreator import CustomWidgetCreator
+from PresenterTemplate import PresenterTemplate
 from functools import partial
 
-class KioskPresenter():
+class UserPresenter(PresenterTemplate):
     def __init__(self, ui) -> None:
         self.ui = ui
         self.MenuManager = MenuManager.instance()
@@ -74,9 +75,9 @@ class KioskPresenter():
             table.setItem(current_row_count, 1, self.WidgetCreator.tableWidgetItem(str(menu.price)))
             table.setItem(current_row_count, 2, self.WidgetCreator.tableWidgetItem(str(quantity)))
             decreaseButton = self.WidgetCreator.cartItemManageButton(managetype="decrease")
-            decreaseButton.clicked.connect(lambda: self.decreaseCartItem(table, decreaseButton))
+            decreaseButton.clicked.connect(lambda: self.decreaseCartItem(decreaseButton))
             increaseButton = self.WidgetCreator.cartItemManageButton(managetype="increase")
-            increaseButton.clicked.connect(lambda: self.increaseCartItem(table, increaseButton))
+            increaseButton.clicked.connect(lambda: self.increaseCartItem(increaseButton))
             table.setCellWidget(current_row_count, 3, decreaseButton)
             table.setCellWidget(current_row_count, 4, increaseButton)
             
@@ -85,11 +86,12 @@ class KioskPresenter():
         self.updateTotalPrice()
     
     # 장바구니 메뉴 개수 감소
-    def decreaseCartItem(self, table, button):
+    def decreaseCartItem(self, signal_sender):
+        table = self.ui.cartTable
         row = -1
         # 버튼이 들어있는 행 찾음
         for i in range(table.rowCount()):
-            if table.cellWidget(i, 3) == button:
+            if table.cellWidget(i, 3) == signal_sender:
                 row = i
         if row == -1:
             print("Couldn't find row")
@@ -107,11 +109,12 @@ class KioskPresenter():
         self.updateTotalPrice()
     
     # 장바구니 메뉴 개수 증가
-    def increaseCartItem(self, table, button):
+    def increaseCartItem(self, signal_sender):
+        table = self.ui.cartTable
         row = -1
         # 버튼이 들어있는 행 찾음
         for i in range(table.rowCount()):
-            if table.cellWidget(i, 4) == button:
+            if table.cellWidget(i, 4) == signal_sender:
                 row = i
         if row == -1:
             print("Couldn't find row")
@@ -127,7 +130,8 @@ class KioskPresenter():
         
     
     # 장바구니 초기화
-    def clearCart(self, table):
+    def clearCart(self):
+        table = self.ui.cartTable
         for i in range(table.rowCount()-1,-1,-1):
             table.removeRow(i)
         self.OrderManager.clearCart()
@@ -140,11 +144,12 @@ class KioskPresenter():
 
     # 주문 진행
     def processOrder(self):
+        cart = self.OrderManager.getCart()
+        if len(cart) == 0: return
         self.OrderManager.processOrder()
         
         num = self.nextnumticketnum
         tprice = self.OrderManager.calculateTotalPrice()
-        cart = self.OrderManager.getCart()
         self.adminPresenter.addOrderQueueItem(cart, num, tprice)
         window = self.WidgetCreator.numTicket(num, tprice, cart)
         self.nextnumticketnum += 1
