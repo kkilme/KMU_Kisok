@@ -1,4 +1,3 @@
 # KMU_Kisok
-### 실행 방법: KioskSystem.py 실행
 
-여러 자잘한 버그 있을 수 있음
+PyQt 및 Mysql을 사용한 간단한 키오스크 시스템
